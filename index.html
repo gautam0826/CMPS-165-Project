@@ -132,11 +132,22 @@
                         d3.select(elt).style("fill", "blue");
                     });
 			
-				
+				d3.csv("EPA20002010CensusCombined.csv", function(csv) {
+                    //console.log(csv);
             
                     //Load in GeoJSON data
                     //data from https://common-data.carto.com/tables/cb_2013_us_cbsa_5m/public/map
 				    d3.json("cb_2013_us_cbsa_5m.json", function(json_2) {
+                        
+                        for(var a = 0; a < csv.length; a++){
+                            for(var b = 0; b < json_2.features.length; b++){
+                                if(json_2.features[b].properties.name == csv[a].CoreBasedStatisticalArea)
+                                    console.log("hello! " + a + " " + b);
+                                    console.log(json_2.features[b].properties.name);
+                                    json_2.features[b].properties.pop90 = csv[a].d1990;
+                                    break;
+                            }
+                        }
 
 					   //Bind data and create one path per GeoJSON feature
 					   svg.selectAll("path")
@@ -171,11 +182,11 @@
                                 var elt = document.getElementById(id);
                                 //console.log(elt);
                                 d3.select(elt).style("fill", "yellow");
-                            });
-                            /*.append("title")
+                            })
+                            .append("title")
                             .text(function(d) {
-                                return d.properties.name;
-                            });*/
+                                return "Name: " + d.properties.name + "\n1990: " + d.properties.pop90;
+                            });
                 
                 
                         //Bind data and create one path per GeoJSON feature
@@ -211,16 +222,16 @@
                                 var elt = document.getElementById(id);
                                 //console.log(elt);
                                 d3.select(elt).style("fill", "yellow");
-                            });
-                            /*.append("title")
+                            })
+                            .append("title")
                             .text(function(d) {
-                                return d.properties.name;
-                            });*/
+                                return "Name: " + d.properties.name + "/n1990: " + d.properties.pop90;
+                            });
                         
                     });
-                    
+                });
 			
-				});
+            });
             
             //pan and zoom code derived from bl.ocks.org/mbostock/3892919 and http://www.puzzlr.org/zoom-in-d3v4-minimal-example/ and especially https://bl.ocks.org/rutgerhofste/5bd5b06f7817f0ff3ba1daa64dee629d
             //define behaviour and link to scroll wheel
