@@ -10,6 +10,7 @@ var colors = d3.scaleOrdinal(d3.schemeCategory20);
 var svg_a = d3.select("div")
     //.append("div")
     //.attr("align", "left")
+    .attr("class","bubbles")
     .append("svg")
     .attr("align", "left")
     .attr("width", width + margin.left + margin.right)
@@ -41,6 +42,7 @@ var yAxis = d3.axisLeft(yScale).tickPadding(2);
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
+  
 
 d3.csv("EPA20002010CensusCombined2.csv", function(error, data) {
   if (error) throw error;
@@ -57,6 +59,7 @@ d3.csv("EPA20002010CensusCombined2.csv", function(error, data) {
     // Define domain for xScale and yScale
     xScale.domain([0,d3.max(data, function(d) {return d.PopDensity; })]);
     yScale.domain([d3.min(data, function(d) {return d.EPA; }),d3.max(data, function(d) {return d.EPA; })]);
+    
     
     
     var tipMouseover = function(d) {
@@ -76,6 +79,8 @@ d3.csv("EPA20002010CensusCombined2.csv", function(error, data) {
           .duration(300) // ms
           .style("opacity", 0); // don't care about position!
     };
+    
+    
 
     //Draw Scatterplot
     svg_a.selectAll(".dot")

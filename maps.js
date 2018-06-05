@@ -1,6 +1,9 @@
 //Width and height
-			var w = 500;
-			var h = 300;
+var margin = {left: 40, right: 40, top: 10, bottom: 30 }, 
+    w = 500 - margin.left -margin.right,
+    h = 300 - margin.top - margin.bottom;
+//			var w = 500;
+//			var h = 300;
 
 			//Define map projection
 			var projection = d3.geoAlbersUsa()
@@ -21,13 +24,15 @@
 			//Create SVG element
 			var svg = d3.select("div")
                         .append("svg")
-                        .attr("align", "top right")
+                        .attr("class", "map1")
+//                        .attr("align", "bottom right")
 						.attr("width", w)
 						.attr("height", h);
             
             var svg_2 = d3.select("div")
                           .append("svg")
-                          .attr("align", "bottom right")
+                          .attr("class", "map2")
+//                          .attr("align", "bottom left")
                           .attr("width", w)
                           .attr("height", h);
 
