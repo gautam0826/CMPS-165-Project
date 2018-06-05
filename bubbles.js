@@ -7,7 +7,9 @@ var margin = {left: 80, right: 80, top: 50, bottom: 50 },
 var colors = d3.scaleOrdinal(d3.schemeCategory20);
 
 //Define SVG
-var svg = d3.select("body")
+var svg_a = d3.select("body")
+    .append("div")
+    .attr("align", "left")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -15,7 +17,7 @@ var svg = d3.select("body")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 //Define clipping region 
-svg.append("defs").append("clipPath")
+svg_a.append("defs").append("clipPath")
     .attr("id", "clip")
     .append("rect")
     .attr("width", width)
@@ -75,7 +77,7 @@ d3.csv("EPA20002010CensusCombined2.csv", function(error, data) {
     };
 
     //Draw Scatterplot
-    svg.selectAll(".dot")
+    svg_a.selectAll(".dot")
         .data(data)
         .enter().append("circle")
         .attr("class", "dot")
@@ -94,7 +96,7 @@ d3.csv("EPA20002010CensusCombined2.csv", function(error, data) {
     // Call the function d3.behavior.zoom to Add zoom
 
     //x-axis
-    svg.append("g")
+    svg_a.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
@@ -107,7 +109,7 @@ d3.csv("EPA20002010CensusCombined2.csv", function(error, data) {
         .text("Population Density(Population per Sq. mile)");
 
     //Y-axis
-    svg.append("g")
+    svg_a.append("g")
         .attr("class", "y axis")
         .call(yAxis)
         .append("text")
