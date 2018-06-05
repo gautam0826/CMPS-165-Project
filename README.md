@@ -1,11 +1,8 @@
 # CMPS-165-Project
 
+https://gautam0826.github.io/CMPS-165-Project/05_choropleth.html
 
 Sources:
-
-http://www.atlasofurbanexpansion.org/data (Accra.zip, Areas_and_Densities_Table_1.csv	, Blocks_and_Roads_Table_1.csv, Blocks_and_Roads_Table_2.csv)
-
-http://www.who.int/airpollution/data/cities/en/ (aap_air_quality_database_2018_v10.xlsx)
 
 https://www.epa.gov/air-trends/air-quality-cities-and-counties (EPA.csv)
 
