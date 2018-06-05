@@ -7,10 +7,11 @@ var margin = {left: 80, right: 80, top: 50, bottom: 50 },
 var colors = d3.scaleOrdinal(d3.schemeCategory20);
 
 //Define SVG
-var svg_a = d3.select("body")
-    .append("div")
-    .attr("align", "left")
+var svg_a = d3.select("div")
+    //.append("div")
+    //.attr("align", "left")
     .append("svg")
+    .attr("align", "left")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")

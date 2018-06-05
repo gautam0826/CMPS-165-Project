@@ -17,18 +17,17 @@
 								//Colors derived from ColorBrewer, by Cynthia Brewer, and included in
 								//https://github.com/d3/d3-scale-chromatic
 
+            //var div = d3.select("body").append("div").attr("align", "right");
 			//Create SVG element
-			var svg = d3.select("body")
-                        .append("div")
-                        .attr("align", "right")
-						.append("svg")
+			var svg = d3.select("div")
+                        .append("svg")
+                        .attr("align", "top right")
 						.attr("width", w)
 						.attr("height", h);
             
-            var svg_2 = d3.select("body")
-                          .append("div")
-                          .attr("align", "right")
+            var svg_2 = d3.select("div")
                           .append("svg")
+                          .attr("align", "bottom right")
                           .attr("width", w)
                           .attr("height", h);
 
