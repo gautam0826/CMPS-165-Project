@@ -68,7 +68,7 @@ d3.csv("EPA20002010CensusCombined2.csv", function(error, data) {
         tooltip.html(html)
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 15) + "px")
-            .style("background-color", colors(d.country))
+            .style("background-color", "white")
             .transition()
             .duration(200) // ms
             .style("opacity", .9) // started as 0!

@@ -10,7 +10,7 @@ body {
 }
 
 .bubbles {
-    float:left;
+/*    float:left;*/
 }
 .dot {
   stroke: #000;
@@ -35,7 +35,7 @@ body {
 }
 
 .info {
-    align-self: bottom;
+    float: inherit;
 }
 .zoom {
   cursor: move;
