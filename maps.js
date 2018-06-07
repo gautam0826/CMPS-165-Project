@@ -151,7 +151,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            .attr("id", function(d) {
                                 return "1_" + d.properties.name;
                            })
-                           .attr("class", "mass")
+                           //.attr("class", "mass")
                            .attr("class", function(d) {
                               //Get data value
 					   		  //var value = d.properties.value;
@@ -163,26 +163,26 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 					   		
 					   		  if (far_west.has(state)) {
 					   			//If value exists…
-						   		return "far_west";
+						   		return "mass far_west";
 					   		  } else if(rocky_mountain.has(state)) {
 					   			//If value is undefined…
-						   		return "rocky_mountain";
+						   		return "mass rocky_mountain";
 					          } else if(plains.has(state)) {
-                                  return "plains";
+                                  return "mass plains";
                               } else if(southwest.has(state)) {
-                                  return "southwest";
+                                  return "mass southwest";
                               } else if(great_lakes.has(state)) {
-                                  return "great_lakes";
+                                  return "mass great_lakes";
                               } else if(southeast.has(state)) {
-                                  return "southeast";
+                                  return "mass southeast";
                               } else if(mideast.has(state)) {
-                                  return "mideast";
+                                  return "mass mideast";
                               } else if(new_england.has(state)) {
-                                  return "new_england";
+                                  return "mass new_england";
                               } else if(hawaii.has(state)) {
-                                  return "hawaii";
+                                  return "mass hawaii";
                               } else {
-                                  return "alaska";
+                                  return "mass alaska";
                               }})
 					       .style("fill", function(d) {
 					   		  //Get data value
@@ -244,7 +244,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            .attr("id", function(d) {
                                 return "2_" + d.properties.name;
                            })
-                           .attr("class", "mass")
+                           //.attr("class", "mass")
                            .attr("class", function(d) {
                               //Get data value
 					   		  //var value = d.properties.value;
@@ -256,26 +256,26 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 					   		
 					   		  if (far_west.has(state)) {
 					   			//If value exists…
-						   		return "far_west";
+						   		return "mass far_west";
 					   		  } else if(rocky_mountain.has(state)) {
 					   			//If value is undefined…
-						   		return "rocky_mountain";
+						   		return "mass rocky_mountain";
 					          } else if(plains.has(state)) {
-                                  return "plains";
+                                  return "mass plains";
                               } else if(southwest.has(state)) {
-                                  return "southwest";
+                                  return "mass southwest";
                               } else if(great_lakes.has(state)) {
-                                  return "great_lakes";
+                                  return "mass great_lakes";
                               } else if(southeast.has(state)) {
-                                  return "southeast";
+                                  return "mass southeast";
                               } else if(mideast.has(state)) {
-                                  return "mideast";
+                                  return "mass mideast";
                               } else if(new_england.has(state)) {
-                                  return "new_england";
+                                  return "mass new_england";
                               } else if(hawaii.has(state)) {
-                                  return "hawaii";
+                                  return "mass hawaii";
                               } else {
-                                  return "alaska";
+                                  return "mass alaska";
                               }})
 					       .style("fill", function(d) {
 					   		  //Get data value
