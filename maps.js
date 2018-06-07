@@ -152,6 +152,38 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 return "1_" + d.properties.name;
                            })
                            .attr("class", "mass")
+                           .attr("class", function(d) {
+                              //Get data value
+					   		  //var value = d.properties.value;
+                              var name = d.properties.name;
+                              var state = name.substr(name.length - 2, name.length);
+                              //console.log(name + ", " + state);
+                              //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
+                              //from https://htmlcolorcodes.com/color-chart/, selection chart fourth row from bottom left to right to fill
+					   		
+					   		  if (far_west.has(state)) {
+					   			//If value exists…
+						   		return "far_west";
+					   		  } else if(rocky_mountain.has(state)) {
+					   			//If value is undefined…
+						   		return "rocky_mountain";
+					          } else if(plains.has(state)) {
+                                  return "plains";
+                              } else if(southwest.has(state)) {
+                                  return "southwest";
+                              } else if(great_lakes.has(state)) {
+                                  return "great_lakes";
+                              } else if(southeast.has(state)) {
+                                  return "southeast";
+                              } else if(mideast.has(state)) {
+                                  return "mideast";
+                              } else if(new_england.has(state)) {
+                                  return "new_england";
+                              } else if(hawaii.has(state)) {
+                                  return "hawaii";
+                              } else {
+                                  return "alaska";
+                              }})
 					       .style("fill", function(d) {
 					   		  //Get data value
 					   		  //var value = d.properties.value;
@@ -213,6 +245,38 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 return "2_" + d.properties.name;
                            })
                            .attr("class", "mass")
+                           .attr("class", function(d) {
+                              //Get data value
+					   		  //var value = d.properties.value;
+                              var name = d.properties.name;
+                              var state = name.substr(name.length - 2, name.length);
+                              //console.log(name + ", " + state);
+                              //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
+                              //from https://htmlcolorcodes.com/color-chart/, selection chart fourth row from bottom left to right to fill
+					   		
+					   		  if (far_west.has(state)) {
+					   			//If value exists…
+						   		return "far_west";
+					   		  } else if(rocky_mountain.has(state)) {
+					   			//If value is undefined…
+						   		return "rocky_mountain";
+					          } else if(plains.has(state)) {
+                                  return "plains";
+                              } else if(southwest.has(state)) {
+                                  return "southwest";
+                              } else if(great_lakes.has(state)) {
+                                  return "great_lakes";
+                              } else if(southeast.has(state)) {
+                                  return "southeast";
+                              } else if(mideast.has(state)) {
+                                  return "mideast";
+                              } else if(new_england.has(state)) {
+                                  return "new_england";
+                              } else if(hawaii.has(state)) {
+                                  return "hawaii";
+                              } else {
+                                  return "alaska";
+                              }})
 					       .style("fill", function(d) {
 					   		  //Get data value
 					   		  //var value = d.properties.value;
