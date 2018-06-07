@@ -7,7 +7,7 @@ var margin = {left: 80, right: 80, top: 50, bottom: 50 },
 var colors = d3.scaleOrdinal(d3.schemeCategory20);
 
 //Define SVG
-var svg_a = d3.select("body")
+var svg_a = d3.select("div#chart")
     .append("svg")
     .attr("align", "left")
     .attr("width", width + margin.left + margin.right)
@@ -121,9 +121,11 @@ var slider2 = d3.sliderHorizontal()
             .attr("r", function(d) { return Math.sqrt(d["Population " + val])/75; })
             .attr("cx", function(d) {return xScale(d["Density " + val]);})
             .attr("cy", function(d) {return yScale(d["Pollutant " + val]);})
+            .attr("id","slider_div")
     });
 
 var g = d3.select("div#slider2").append("svg")
+    .attr("class", "slider")
     .attr("width", 1000)
     .attr("height", 100)
     .append("g")

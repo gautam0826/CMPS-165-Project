@@ -22,7 +22,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 
             //var div = d3.select("body").append("div").attr("align", "right");
 			//Create SVG element
-			var svg = d3.select("div")
+			var svg = d3.select("#chart")
                         .append("svg")
                         .attr("class", "map1")
 //                        .attr("align", "bottom right")

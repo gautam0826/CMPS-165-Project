@@ -54,5 +54,17 @@ body {
             .msa:hover {
                 color: yellow;
             }
-
-
+.slider{
+/*    background: black;*/
+/*    float: right;*/
+    margin-left: 40px;
+/*    align-content: flex-end;*/
+    
+}
+.col-sm-2{
+/*    background: black;*/
+    margin-left: 400px;
+    width: auto;
+    font-family: fantasy;
+    
+}
