@@ -23,7 +23,7 @@ svg_a.append("defs").append("clipPath")
     .attr("height", height);
 
 //Define Scales   
-var xScale = d3.scaleLinear()
+var xScale = d3.scaleSqrt()
     .domain([0,16]) //Need to redefine this after loading the data
     .range([0, width]);
 
@@ -35,6 +35,7 @@ var yScale = d3.scaleLinear()
 var xAxis = d3.axisBottom(xScale).tickPadding(2);
 var yAxis = d3.axisLeft(yScale).tickPadding(2);
 
+        
 //Define Tooltip here
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
@@ -45,7 +46,7 @@ d3.csv("Data.csv", function(error, data) {
     console.log(data)
 
     // Define domain for xScale and yScale
-    xScale.domain([0,3500]);
+    xScale.domain([0,3200]);
     yScale.domain([.04, 0.16]);
     //xScale.domain([0,d3.max(data, function(d) {return 1.5*d["Density 1990"]; })]);
     //yScale.domain([.7*d3.min(data, function(d) {return d["Pollutant 1990"]; }),2.9*d3.max(data, function(d) {return d["Pollutant 1990"]; })]);
@@ -61,6 +62,25 @@ d3.csv("Data.csv", function(error, data) {
             .duration(200) // ms
             .style("opacity", .9) // started as 0!
     };
+    var zoom = d3.zoom()
+      .scaleExtent([1, 32])
+      .on("zoom", zoomed);
+    
+    function zoomed() {
+        var new_x_scale = d3.event.transform.rescaleX(xScale);
+        var new_y_scale = d3.event.transform.rescaleY(yScale);
+//      console.log(d3.event.transform)
+        svg_a.select(".x.axis").call(xAxis.scale(new_x_scale));
+        svg_a.select(".y.axis").call(yAxis.scale(new_y_scale));
+        svg.selectAll(".dot")
+        .attr("r", function(d) { return Math.sqrt(d["Population 1990"])/75; })
+        .attr("cx", function(d) {return xScale(d["Density 1990"]);})
+        .attr("cy", function(d) {return yScale(d["Pollutant 1990"]);})
+//        .attr("text", function(d) { return xScale(d.gdp); })
+        .attr("transform", d3.event.transform)
+};
+
+svg_a.call(zoom);
 
     var tipMouseout = function(d) {
       tooltip.transition()
@@ -68,15 +88,18 @@ d3.csv("Data.csv", function(error, data) {
           .style("opacity", 0); // don't care about position!
     };
     
+    
     //Draw Scatterplot
-    svg_a.selectAll(".dot")
+    svg_a.selectAll(".dot")        
         .data(data)
         .enter().append("circle")
+        .style("opacity", .7)
+    
         .attr("class", "dot")
         .attr("r", function(d) { return Math.sqrt(d["Population 1990"])/75; })
         .attr("cx", function(d) {return xScale(d["Density 1990"]);})
         .attr("cy", function(d) {return yScale(d["Pollutant 1990"]);})
-        .style("fill", function (d) { return colors("TBDDD"); })
+        .style("fill", function (d) { return colors(d["Pollutant 1990"]); })
         .attr("clip-path", "url(#clip)")
         .on("mouseover", tipMouseover)
         .on("mouseout", tipMouseout);
@@ -111,17 +134,29 @@ d3.csv("Data.csv", function(error, data) {
 //https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
 var slider2 = d3.sliderHorizontal()
     .min(1990)
-    .max(2016)
+    .max(2010)
     .step(1)
     .width(700)
     .on('onchange', val => {
         d3.select("p#value2").text(val);
+        var tipMouseover = function(d) {
+        //console.log(d);
+        var html  = "MSA:" + d["Core Based Statistical Area"] + "<br>Pollutant value: " + d["Pollutant " + val] + "<br>Population: " + d["Population " + val] + "<br>Pop Density: " + d["Density " + val];
+        tooltip.html(html)
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY - 15) + "px")
+            //.style("background-color", colors(d.country))
+            .transition()
+            .duration(200) // ms
+            .style("opacity", .9) // started as 0!
+        };
         svg_a.selectAll(".dot")
             .attr("class", "dot")
             .attr("r", function(d) { return Math.sqrt(d["Population " + val])/75; })
             .attr("cx", function(d) {return xScale(d["Density " + val]);})
             .attr("cy", function(d) {return yScale(d["Pollutant " + val]);})
             .attr("id","slider_div")
+            .on("mouseover", tipMouseover);
     });
 
 var g = d3.select("div#slider2").append("svg")
