@@ -137,6 +137,7 @@ var slider2 = d3.sliderHorizontal()
     .max(2010)
     .step(1)
     .width(700)
+    .tickFormat(d3.format("d"))
     .on('onchange', val => {
         d3.select("p#value2").text(val);
         var tipMouseover = function(d) {
