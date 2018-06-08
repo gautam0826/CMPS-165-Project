@@ -1,6 +1,5 @@
 # CMPS-165-Project
-
-https://gautam0826.github.io/CMPS-165-Project/05_choropleth.html
+https://gautam0826.github.io/CMPS-165-Project/test.html
 
 Sources:
 
