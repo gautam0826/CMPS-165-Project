@@ -334,7 +334,9 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
             
             //pan and zoom code derived from bl.ocks.org/mbostock/3892919 and http://www.puzzlr.org/zoom-in-d3v4-minimal-example/ and especially https://bl.ocks.org/rutgerhofste/5bd5b06f7817f0ff3ba1daa64dee629d
             //define behaviour and link to scroll wheel
-            var zoom = d3.zoom().on("zoom", zoomed);
+            var zoom = d3.zoom()
+                .scaleExtent([1, 10])
+                .on("zoom", zoomed);
             
             //apply behaviour to svg
             zoom(svg);
