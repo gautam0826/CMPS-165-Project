@@ -69,15 +69,33 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     .attr("class", "mass")
 					.style("fill", function(d) {
 						//Get data value
-					   	var value = d.properties.value;
-					                        
-					   	if (value) {
-					   		//If value exists…
-							return color(value);
-					   	} else {
+					   	var state = d.properties.state;
+                        //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
+                        //from https://htmlcolorcodes.com/color-chart/, selection chart fourth row from bottom left to right to fill
+					   		
+					   if (far_west.has(state)) {
+					       //If value exists…
+						   return "rgb(169,50,38)";
+					   } else if(rocky_mountain.has(state)) {
 					   		//If value is undefined…
-							return "#ccc";
-					   	}
+						   	return "rgb(203,67,53)";
+					   } else if(plains.has(state)) {
+                            return "rgb(136,78,160)";
+                       } else if(southwest.has(state)) {
+                            return "rgb(125,60,152)";
+                       } else if(great_lakes.has(state)) {
+                            return "rgb(36,113,163)";
+                       } else if(southeast.has(state)) {
+                            return "rgb(46, 134, 193)";
+                       } else if(mideast.has(state)) {
+                            return "rgb(23,165,137)";
+                       } else if(new_england.has(state)) {
+                            return "rgb(19,141,117)";
+                       } else if(hawaii.has(state)) {
+                            return "rgb(34,153,84)";
+                       } else {
+                            return "rgb(40,180,99)";
+                       }
 					})
                     .on("click", function(d){
                         //console.log(this);
@@ -109,15 +127,33 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     .attr("class", "mass")
 					.style("fill", function(d) {
 						//Get data value
-					   	var value = d.properties.value;
+					   	var state = d.properties.state;
+                        //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
+                        //from https://htmlcolorcodes.com/color-chart/, selection chart fourth row from bottom left to right to fill
 					   		
-					   	if (value) {
-					   		//If value exists…
-							return color(value);
-					   	} else {
+					   if (far_west.has(state)) {
+					       //If value exists…
+						   return "rgb(169,50,38)";
+					   } else if(rocky_mountain.has(state)) {
 					   		//If value is undefined…
-							return "#ccc";
-					   	}
+						   	return "rgb(203,67,53)";
+					   } else if(plains.has(state)) {
+                            return "rgb(136,78,160)";
+                       } else if(southwest.has(state)) {
+                            return "rgb(125,60,152)";
+                       } else if(great_lakes.has(state)) {
+                            return "rgb(36,113,163)";
+                       } else if(southeast.has(state)) {
+                            return "rgb(46, 134, 193)";
+                       } else if(mideast.has(state)) {
+                            return "rgb(23,165,137)";
+                       } else if(new_england.has(state)) {
+                            return "rgb(19,141,117)";
+                       } else if(hawaii.has(state)) {
+                            return "rgb(34,153,84)";
+                       } else {
+                            return "rgb(40,180,99)";
+                       }
 					})
                     .on("click", function(d){
                         //console.log(this);
@@ -185,7 +221,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                   return "mass alaska";
                               }})
 					       .style("fill", function(d) {
-					   		  //Get data value
+					   		  /* //Get data value
 					   		  //var value = d.properties.value;
                               var name = d.properties.name;
                               var state = name.substr(name.length - 2, name.length);
@@ -215,7 +251,9 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                   return "rgb(34,153,84)";
                               } else {
                                   return "rgb(40,180,99)";
-                              }})
+                              }*/
+                              return "#CCC";
+                           })
                            .on("click", function(d){
                                 //console.log(this);
                                 d3.select(this).style("fill", "yellow");
@@ -278,7 +316,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                   return "mass alaska";
                               }})
 					       .style("fill", function(d) {
-					   		  //Get data value
+					   		  /* //Get data value
 					   		  //var value = d.properties.value;
                               var name = d.properties.name;
                               var state = name.substr(name.length - 2, name.length);
@@ -308,7 +346,9 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                   return "rgb(34,153,84)";
                               } else {
                                   return "rgb(40,180,99)";
-                              }})
+                              }*/
+                              return "#CCC";
+                           })
                            .on("click", function(d){
                                 //console.log(this);
                                 d3.select(this).style("fill", "yellow");
