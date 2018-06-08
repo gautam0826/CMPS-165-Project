@@ -20,6 +20,19 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 								//Colors derived from ColorBrewer, by Cynthia Brewer, and included in
 								//https://github.com/d3/d3-scale-chromatic
 
+            //region sets
+            //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
+            var far_west = new Set(["CA", "OR", "WA", "NV"]);
+            var rocky_mountain = new Set(["ID", "MT", "WY", "UT", "CO"]);
+            var plains = new Set(["ND", "SD", "NE", "KS", "MN", "IA", "MO"]);
+            var southwest = new Set(["AZ", "NM", "TX", "OK"]);
+            var great_lakes = new Set(["WI", "MI", "IL", "IN", "OH"]);
+            var southeast = new Set(["AR", "LA", "KY", "WV", "VA", "TN", "NC", "MS", "AL", "GA", "SC", "FL"]);
+            var mideast = new Set(["NY", "PA", "NJ", "DE", "MD", "DC"]);
+            var new_england = new Set(["ME", "NH", "VT", "MA", "RI", "CT"]);
+            var hawaii = new Set(["HI"]);
+            var alaska = new Set(["AK"]);
+
             //var div = d3.select("body").append("div").attr("align", "right");
 			//Create SVG element
 			var svg = d3.select("#chart")
@@ -57,7 +70,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 					.style("fill", function(d) {
 						//Get data value
 					   	var value = d.properties.value;
-					   		
+					                        
 					   	if (value) {
 					   		//If value exists…
 							return color(value);
@@ -78,6 +91,10 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                         var elt = document.getElementById(id);
                         //console.log(elt);
                         d3.select(elt).style("fill", "blue");
+                    })
+                    .append("title")
+                    .text(function (d) {
+                        return d.properties.name; 
                     });
                 
                 //Bind data and create one path per GeoJSON feature
@@ -114,6 +131,10 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                         var elt = document.getElementById(id);
                         //console.log(elt);
                         d3.select(elt).style("fill", "blue");
+                    })
+                    .append("title")
+                    .text(function(d) {
+                        return d.properties.name;
                     });
 			
 				
@@ -130,18 +151,71 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            .attr("id", function(d) {
                                 return "1_" + d.properties.name;
                            })
-                           .attr("class", "mass")
+                           //.attr("class", "mass")
+                           .attr("class", function(d) {
+                              //Get data value
+					   		  //var value = d.properties.value;
+                              var name = d.properties.name;
+                              var state = name.substr(name.length - 2, name.length);
+                              //console.log(name + ", " + state);
+                              //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
+                              //from https://htmlcolorcodes.com/color-chart/, selection chart fourth row from bottom left to right to fill
+					   		
+					   		  if (far_west.has(state)) {
+					   			//If value exists…
+						   		return "mass far_west";
+					   		  } else if(rocky_mountain.has(state)) {
+					   			//If value is undefined…
+						   		return "mass rocky_mountain";
+					          } else if(plains.has(state)) {
+                                  return "mass plains";
+                              } else if(southwest.has(state)) {
+                                  return "mass southwest";
+                              } else if(great_lakes.has(state)) {
+                                  return "mass great_lakes";
+                              } else if(southeast.has(state)) {
+                                  return "mass southeast";
+                              } else if(mideast.has(state)) {
+                                  return "mass mideast";
+                              } else if(new_england.has(state)) {
+                                  return "mass new_england";
+                              } else if(hawaii.has(state)) {
+                                  return "mass hawaii";
+                              } else {
+                                  return "mass alaska";
+                              }})
 					       .style("fill", function(d) {
 					   		  //Get data value
-					   		  var value = d.properties.value;
+					   		  //var value = d.properties.value;
+                              var name = d.properties.name;
+                              var state = name.substr(name.length - 2, name.length);
+                              //console.log(name + ", " + state);
+                              //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
+                              //from https://htmlcolorcodes.com/color-chart/, selection chart fourth row from bottom left to right to fill
 					   		
-					   		  if (value) {
+					   		  if (far_west.has(state)) {
 					   			//If value exists…
-						   		return color(value);
-					   		  } else {
+						   		return "rgb(169,50,38)";
+					   		  } else if(rocky_mountain.has(state)) {
 					   			//If value is undefined…
-						   		return "#999";
-					       }})
+						   		return "rgb(203,67,53)";
+					          } else if(plains.has(state)) {
+                                  return "rgb(136,78,160)";
+                              } else if(southwest.has(state)) {
+                                  return "rgb(125,60,152)";
+                              } else if(great_lakes.has(state)) {
+                                  return "rgb(36,113,163)";
+                              } else if(southeast.has(state)) {
+                                  return "rgb(46, 134, 193)";
+                              } else if(mideast.has(state)) {
+                                  return "rgb(23,165,137)";
+                              } else if(new_england.has(state)) {
+                                  return "rgb(19,141,117)";
+                              } else if(hawaii.has(state)) {
+                                  return "rgb(34,153,84)";
+                              } else {
+                                  return "rgb(40,180,99)";
+                              }})
                            .on("click", function(d){
                                 //console.log(this);
                                 d3.select(this).style("fill", "yellow");
@@ -154,11 +228,11 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 var elt = document.getElementById(id);
                                 //console.log(elt);
                                 d3.select(elt).style("fill", "yellow");
-                            });
-                            /*.append("title")
+                            })
+                            .append("title")
                             .text(function(d) {
                                 return d.properties.name;
-                            });*/
+                            });
                 
                 
                         //Bind data and create one path per GeoJSON feature
@@ -170,18 +244,71 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            .attr("id", function(d) {
                                 return "2_" + d.properties.name;
                            })
-                           .attr("class", "mass")
+                           //.attr("class", "mass")
+                           .attr("class", function(d) {
+                              //Get data value
+					   		  //var value = d.properties.value;
+                              var name = d.properties.name;
+                              var state = name.substr(name.length - 2, name.length);
+                              //console.log(name + ", " + state);
+                              //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
+                              //from https://htmlcolorcodes.com/color-chart/, selection chart fourth row from bottom left to right to fill
+					   		
+					   		  if (far_west.has(state)) {
+					   			//If value exists…
+						   		return "mass far_west";
+					   		  } else if(rocky_mountain.has(state)) {
+					   			//If value is undefined…
+						   		return "mass rocky_mountain";
+					          } else if(plains.has(state)) {
+                                  return "mass plains";
+                              } else if(southwest.has(state)) {
+                                  return "mass southwest";
+                              } else if(great_lakes.has(state)) {
+                                  return "mass great_lakes";
+                              } else if(southeast.has(state)) {
+                                  return "mass southeast";
+                              } else if(mideast.has(state)) {
+                                  return "mass mideast";
+                              } else if(new_england.has(state)) {
+                                  return "mass new_england";
+                              } else if(hawaii.has(state)) {
+                                  return "mass hawaii";
+                              } else {
+                                  return "mass alaska";
+                              }})
 					       .style("fill", function(d) {
 					   		  //Get data value
-					   		  var value = d.properties.value;
+					   		  //var value = d.properties.value;
+                              var name = d.properties.name;
+                              var state = name.substr(name.length - 2, name.length);
+                              //console.log(name + ", " + state);
+                              //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
+                              //from https://htmlcolorcodes.com/color-chart/, selection chart fourth row from bottom left to right to fill
 					   		
-					   		  if (value) {
+					   		  if (far_west.has(state)) {
 					   			//If value exists…
-						   		return color(value);
-					   		  } else {
+						   		return "rgb(169,50,38)";
+					   		  } else if(rocky_mountain.has(state)) {
 					   			//If value is undefined…
-						   		return "#999";
-					       }})
+						   		return "rgb(203,67,53)";
+					          } else if(plains.has(state)) {
+                                  return "rgb(136,78,160)";
+                              } else if(southwest.has(state)) {
+                                  return "rgb(125,60,152)";
+                              } else if(great_lakes.has(state)) {
+                                  return "rgb(36,113,163)";
+                              } else if(southeast.has(state)) {
+                                  return "rgb(46, 134, 193)";
+                              } else if(mideast.has(state)) {
+                                  return "rgb(23,165,137)";
+                              } else if(new_england.has(state)) {
+                                  return "rgb(19,141,117)";
+                              } else if(hawaii.has(state)) {
+                                  return "rgb(34,153,84)";
+                              } else {
+                                  return "rgb(40,180,99)";
+                              }})
                            .on("click", function(d){
                                 //console.log(this);
                                 d3.select(this).style("fill", "yellow");
@@ -194,11 +321,11 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 var elt = document.getElementById(id);
                                 //console.log(elt);
                                 d3.select(elt).style("fill", "yellow");
-                            });
-                            /*.append("title")
+                            })
+                            .append("title")
                             .text(function(d) {
                                 return d.properties.name;
-                            });*/
+                            });
                         
                     });
                     
