@@ -178,4 +178,3 @@ var g = d3.select("div#slider2").append("svg")
 g.call(slider2);
 
 d3.select("p#value2").text((slider2.value()));
-d3.select("a#setValue2").on("click", () => slider2.value(5));
