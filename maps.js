@@ -185,8 +185,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             var c_geoid = csv[i].MSA_GEOID;
                             for(var j = 0; j < json_2.features.length; j++){
                                 if(c_geoid == json_2.features[j].properties.geoid){
-                                    json_2.features[j].properties.pol90 = csv[i].Pollutant_1990;
-                                    json_2.features[j].properties.pop90 = csv[i].Population_1990;
+                                    json_2.features[j].properties.pol90 = csv[i]["Pollutant 1990"];
+                                    json_2.features[j].properties.pop90 = csv[i]["Population 1990"];
                                     break;
                                 }
                             }
@@ -321,13 +321,13 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 return d.properties.name;
                             });
                         
-                            svg.append("text")
+                            /*svg.append("text")
                                 .attr("align", "center")
                                 .text("1990 Pollution");
                         
                             svg_2.append("text")
                                     .attr("align", "center")
-                                    .text("1990 Population");
+                                    .text("1990 Population");*/
                         
                     });
                     });

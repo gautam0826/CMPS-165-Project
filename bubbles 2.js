@@ -101,7 +101,7 @@ svg_a.call(zoom);
     };
     
     function order(a, b) {
-        return +b["Population_1990"] - +a["Population_1990"];
+        return +b["Population 1990"] - +a["Population 1990"];
     }
     
     //Draw Scatterplot
@@ -111,9 +111,9 @@ svg_a.call(zoom);
         .style("opacity", .7)
     
         .attr("class", "dot")
-        .attr("r", function(d) { return Math.sqrt(d["Population_1990"])/75; })
+        .attr("r", function(d) { return Math.sqrt(d["Population 1990"])/75; })
         .attr("cx", function(d) {return xScale(d["Density 1990"]);})
-        .attr("cy", function(d) {return yScale(d["Pollutant_1990"]);})
+        .attr("cy", function(d) {return yScale(d["Pollutant 1990"]);})
         .style("fill", function (d) { return colors(d["region"]); })
         .attr("clip-path", "url(#clip)")
         .on("mouseover", tipMouseover)
