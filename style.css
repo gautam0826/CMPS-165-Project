@@ -27,13 +27,13 @@ body {
 
 /*Add Tooltip Type here*/
 .tooltip {
+  font-size: large;
   position: absolute;
-  line-height: 1;
-  font-weight: bold;
-  padding: 12px;
+  line-height: 1.5;
+  padding: 10px;
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
-  border-radius: 2px;
+  border-radius: 20px;
 }
 
 .info {

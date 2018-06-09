@@ -53,10 +53,15 @@ d3.csv("Data.csv", function(error, data) {
 
     var tipMouseover = function(d) {
         //console.log(d);
-        var html  = "MSA:" + d["Core Based Statistical Area"] + "<br>Pollutant value: " + d["Pollutant 1990"] + "<br>Population: " + d["Population 1990"] + "<br>Pop Density: " + d["Density 1990"];
+
+        var MSA = "MSA: "
+        var PV = "Pollutant value: "
+        var POP = "Population: "
+        var PD = "Pop Density: "
+        var html  = MSA.bold() + d["Core Based Statistical Area"] + "<br>" + PV.bold() + d["Pollutant 1990"] + "<br>" + POP.bold() + d["Population 1990"] + "<br>" + PD.bold() + d["Density 1990"];
         tooltip.html(html)
-            .style("left", (550) + "px")
-            .style("top", (150) + "px")
+            .style("left", (540) + "px")
+            .style("top", (100) + "px")
             //.style("background-color", colors(d.country))
             .transition()
             .duration(200) // ms
