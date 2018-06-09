@@ -15,10 +15,11 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 							 .projection(projection);
 							 
 			//Define quantize scale to sort data values into buckets of color
-			var color = d3.scaleQuantize()
-								.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]);
-								//Colors derived from ColorBrewer, by Cynthia Brewer, and included in
-								//https://github.com/d3/d3-scale-chromatic
+			var color_1 = d3.scaleQuantize()
+								.range(["rgb(20,20,20)","rgb(60,60,60)","rgb(100,100,100)","rgb(140,140,140)","rgb(180,180,180)","rgb(220,220,220)"]);
+            var color_2 = d3.scaleQuantize()
+								.range(["rgb(20,20,20)","rgb(60,60,60)","rgb(100,100,100)","rgb(140,140,140)","rgb(180,180,180)","rgb(220,220,220)"]);
+								
 
             //region sets
             //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
@@ -174,10 +175,23 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     });
 			
 				
-            
+                    //Load in csv data parralel to it
+                    d3.csv("Data.csv", function(csv) {
                     //Load in GeoJSON data
 				    d3.json("cb_2013_us_cbsa_5m.json", function(json_2) {
 
+                        //bind data to json
+                        for(var i = 0; i < csv.length; i++){
+                            var c_geoid = csv[i].MSA_GEOID;
+                            for(var j = 0; j < json_2.features.length; j++){
+                                if(c_geoid == json_2.features[j].properties.geoid){
+                                    json_2.features[j].properties.pol90 = csv[i].Pollutant_1990;
+                                    json_2.features[j].properties.pop90 = csv[i].Population_1990;
+                                    break;
+                                }
+                            }
+                        }
+                        
 					   //Bind data and create one path per GeoJSON feature
 					   svg.selectAll("path")
 					       .data(json_2.features)
@@ -221,38 +235,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                   return "mass alaska";
                               }})
 					       .style("fill", function(d) {
-					   		  /* //Get data value
-					   		  //var value = d.properties.value;
-                              var name = d.properties.name;
-                              var state = name.substr(name.length - 2, name.length);
-                              //console.log(name + ", " + state);
-                              //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
-                              //from https://htmlcolorcodes.com/color-chart/, selection chart fourth row from bottom left to right to fill
-					   		
-					   		  if (far_west.has(state)) {
-					   			//If value exists…
-						   		return "rgb(169,50,38)";
-					   		  } else if(rocky_mountain.has(state)) {
-					   			//If value is undefined…
-						   		return "rgb(203,67,53)";
-					          } else if(plains.has(state)) {
-                                  return "rgb(136,78,160)";
-                              } else if(southwest.has(state)) {
-                                  return "rgb(125,60,152)";
-                              } else if(great_lakes.has(state)) {
-                                  return "rgb(36,113,163)";
-                              } else if(southeast.has(state)) {
-                                  return "rgb(46, 134, 193)";
-                              } else if(mideast.has(state)) {
-                                  return "rgb(23,165,137)";
-                              } else if(new_england.has(state)) {
-                                  return "rgb(19,141,117)";
-                              } else if(hawaii.has(state)) {
-                                  return "rgb(34,153,84)";
-                              } else {
-                                  return "rgb(40,180,99)";
-                              }*/
-                              return "#CCC";
+					   		  var value_1 = d.properties.pol90;
+                              return color_1(value_1);
                            })
                            .on("click", function(d){
                                 //console.log(this);
@@ -316,38 +300,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                   return "mass alaska";
                               }})
 					       .style("fill", function(d) {
-					   		  /* //Get data value
-					   		  //var value = d.properties.value;
-                              var name = d.properties.name;
-                              var state = name.substr(name.length - 2, name.length);
-                              //console.log(name + ", " + state);
-                              //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
-                              //from https://htmlcolorcodes.com/color-chart/, selection chart fourth row from bottom left to right to fill
-					   		
-					   		  if (far_west.has(state)) {
-					   			//If value exists…
-						   		return "rgb(169,50,38)";
-					   		  } else if(rocky_mountain.has(state)) {
-					   			//If value is undefined…
-						   		return "rgb(203,67,53)";
-					          } else if(plains.has(state)) {
-                                  return "rgb(136,78,160)";
-                              } else if(southwest.has(state)) {
-                                  return "rgb(125,60,152)";
-                              } else if(great_lakes.has(state)) {
-                                  return "rgb(36,113,163)";
-                              } else if(southeast.has(state)) {
-                                  return "rgb(46, 134, 193)";
-                              } else if(mideast.has(state)) {
-                                  return "rgb(23,165,137)";
-                              } else if(new_england.has(state)) {
-                                  return "rgb(19,141,117)";
-                              } else if(hawaii.has(state)) {
-                                  return "rgb(34,153,84)";
-                              } else {
-                                  return "rgb(40,180,99)";
-                              }*/
-                              return "#CCC";
+					   		  var value_2 = d.properties.pop90;
+                              return color_2(value_2);
                            })
                            .on("click", function(d){
                                 //console.log(this);
@@ -367,23 +321,39 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 return d.properties.name;
                             });
                         
+                            svg.append("text")
+                                .attr("align", "center")
+                                .text("1990 Pollution");
+                        
+                            svg_2.append("text")
+                                    .attr("align", "center")
+                                    .text("1990 Population");
+                        
                     });
-                    
+                    });
 			
 				});
             
             //pan and zoom code derived from bl.ocks.org/mbostock/3892919 and http://www.puzzlr.org/zoom-in-d3v4-minimal-example/ and especially https://bl.ocks.org/rutgerhofste/5bd5b06f7817f0ff3ba1daa64dee629d
             //define behaviour and link to scroll wheel
-            var zoom = d3.zoom()
+            var zoom_1 = d3.zoom()
                 .scaleExtent([1, 10])
-                .on("zoom", zoomed);
+                .on("zoom", zoomed_1);
+
+            var zoom_2 = d3.zoom()
+                .scaleExtent([1, 10])
+                .on("zoom", zoomed_2);
             
             //apply behaviour to svg
-            zoom(svg);
-            zoom(svg_2);
+            zoom_1(svg);
+            zoom_2(svg_2);
             
-            function zoomed() {
+            function zoomed_1() {
                 //zoom on details
                 svg.selectAll(".mass").attr("transform", d3.event.transform);
+            }
+
+            function zoomed_2() {
+                //zoom on details
                 svg_2.selectAll(".mass").attr("transform", d3.event.transform);
             }
