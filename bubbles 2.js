@@ -137,7 +137,7 @@ svg_a.call(zoom);
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .attr("font-size", "12px")
-        .text("Fourth highest daily maximum 8-hour O3 concentration");
+        .text("Fourth highest daily maximum 8-hour O3 concentration(Parts per million)");
 })
 //https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
 var slider2 = d3.sliderHorizontal()
