@@ -137,7 +137,7 @@ svg_a.call(zoom);
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .attr("font-size", "12px")
-        .text("O3 Max 99th percentile");
+        .text("Fourth highest daily maximum 8-hour O3 concentration");
 })
 //https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
 var slider2 = d3.sliderHorizontal()
@@ -152,8 +152,10 @@ var slider2 = d3.sliderHorizontal()
         //console.log(d);
         var html  = "MSA:" + d["Core Based Statistical Area"] + "<br>Pollutant value: " + d["Pollutant " + val] + "<br>Population: " + d["Population " + val] + "<br>Pop Density: " + d["Density " + val];
         tooltip.html(html)
-            .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY - 15) + "px")
+            .style("left", (540) + "px")
+            .style("top", (100) + "px")
+            //.style("left", (d3.event.pageX) + "px")
+            //.style("top", (d3.event.pageY - 15) + "px")
             //.style("background-color", colors(d.country))
             .transition()
             .duration(200) // ms
