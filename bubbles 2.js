@@ -4,7 +4,9 @@ var margin = {left: 80, right: 80, top: 50, bottom: 50 },
     height = 500 - margin.top - margin.bottom;
 
 //Define Color
-var colors = d3.scaleOrdinal(d3.schemeCategory20);
+var colors = d3.scaleOrdinal()
+  .domain(["Mideast", "Great Lakes", "Southwest", "Southeast", "Far West", "Plains", "Rocky Mountain", "New England"])
+  .range(d3.schemeCategory10);
 
 //Define SVG
 var svg_a = d3.select("div#chart")
@@ -21,6 +23,11 @@ svg_a.append("defs").append("clipPath")
     .append("rect")
     .attr("width", width)
     .attr("height", height);
+
+//
+svg_a.append("g")
+  .attr("class", "legendOrdinal")
+  .attr("transform", "translate(20,10)");
 
 //Define Scales   
 var xScale = d3.scaleSqrt()
@@ -138,6 +145,16 @@ svg_a.call(zoom);
         .style("text-anchor", "end")
         .attr("font-size", "12px")
         .text("O3 concentration(Parts per million)");
+    
+    //http://d3-legend.susielu.com/#color-ordinal
+    var legendOrdinal = d3.legendColor()
+        .shape("path", d3.symbol().type(d3.symbolCircle).size(130)())
+        .shapePadding(4)
+        .cellFilter(function(d){ return d.label !== "" })
+        .scale(colors);
+
+    svg_a.select(".legendOrdinal")
+        .call(legendOrdinal);
 })
 //https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
 var slider2 = d3.sliderHorizontal()
