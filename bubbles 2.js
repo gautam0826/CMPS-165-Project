@@ -48,17 +48,17 @@ d3.csv("Data.csv", function(error, data) {
     // Define domain for xScale and yScale
     xScale.domain([0,3200]);
     yScale.domain([.04, 0.16]);
-    //xScale.domain([0,d3.max(data, function(d) {return 1.5*d["Density 1990"]; })]);
     //yScale.domain([.7*d3.min(data, function(d) {return d["Pollutant 1990"]; }),2.9*d3.max(data, function(d) {return d["Pollutant 1990"]; })]);
 
     var tipMouseover = function(d) {
         //console.log(d);
 
         var MSA = "MSA: "
-        var PV = "Pollutant value: "
+        var REG = "Region: "
+        var PV = "O3 concentration(ppm): "
         var POP = "Population: "
-        var PD = "Pop Density: "
-        var html  = MSA.bold() + d["Core Based Statistical Area"] + "<br>" + PV.bold() + d["Pollutant 1990"] + "<br>" + POP.bold() + d["Population 1990"] + "<br>" + PD.bold() + d["Density 1990"];
+        var PD = "Population Density: "
+        var html  = MSA.bold() + d["Core Based Statistical Area"] + "<br>" + REG.bold() + d["region"] + "<br>"+ PV.bold() + d["Pollutant 1990"] + "<br>" + POP.bold() + d["Population 1990"] + "<br>" + PD.bold() + d["Density 1990"];
         tooltip.html(html)
             .style("left", (540) + "px")
             .style("top", (100) + "px")
@@ -107,7 +107,7 @@ svg_a.call(zoom);
         .attr("r", function(d) { return Math.sqrt(d["Population 1990"])/75; })
         .attr("cx", function(d) {return xScale(d["Density 1990"]);})
         .attr("cy", function(d) {return yScale(d["Pollutant 1990"]);})
-        .style("fill", function (d) { return colors(d["Pollutant 1990"]); })
+        .style("fill", function (d) { return colors(d["region"]); })
         .attr("clip-path", "url(#clip)")
         .on("mouseover", tipMouseover)
         .on("mouseout", tipMouseout);
@@ -137,7 +137,7 @@ svg_a.call(zoom);
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .attr("font-size", "12px")
-        .text("Fourth highest daily maximum 8-hour O3 concentration(Parts per million)");
+        .text("O3 concentration(Parts per million)");
 })
 //https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
 var slider2 = d3.sliderHorizontal()
@@ -150,7 +150,12 @@ var slider2 = d3.sliderHorizontal()
         d3.select("p#value2").text(val);
         var tipMouseover = function(d) {
         //console.log(d);
-        var html  = "MSA:" + d["Core Based Statistical Area"] + "<br>Pollutant value: " + d["Pollutant " + val] + "<br>Population: " + d["Population " + val] + "<br>Pop Density: " + d["Density " + val];
+        var MSA = "MSA: "
+        var REG = "Region: "
+        var PV = "O3 concentration(ppm): "
+        var POP = "Population: "
+        var PD = "Population Density: "
+        var html  = MSA.bold() + d["Core Based Statistical Area"] + "<br>" + REG.bold() + d["region"] + "<br>"+ PV.bold() + d["Pollutant " + val] + "<br>" + POP.bold() + d["Population " + val] + "<br>" + PD.bold() + d["Density " + val];
         tooltip.html(html)
             .style("left", (540) + "px")
             .style("top", (100) + "px")
