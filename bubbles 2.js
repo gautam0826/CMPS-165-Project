@@ -55,8 +55,8 @@ d3.csv("Data.csv", function(error, data) {
         //console.log(d);
         var html  = "MSA:" + d["Core Based Statistical Area"] + "<br>Pollutant value: " + d["Pollutant 1990"] + "<br>Population: " + d["Population 1990"] + "<br>Pop Density: " + d["Density 1990"];
         tooltip.html(html)
-            .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY - 15) + "px")
+            .style("left", (550) + "px")
+            .style("top", (150) + "px")
             //.style("background-color", colors(d.country))
             .transition()
             .duration(200) // ms
