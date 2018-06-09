@@ -93,10 +93,13 @@ svg_a.call(zoom);
           .style("opacity", 0); // don't care about position!
     };
     
+    function order(a, b) {
+        return +b["Population 1990"] - +a["Population 1990"];
+    }
     
     //Draw Scatterplot
     svg_a.selectAll(".dot")        
-        .data(data)
+        .data(data.sort(order))
         .enter().append("circle")
         .style("opacity", .7)
     
