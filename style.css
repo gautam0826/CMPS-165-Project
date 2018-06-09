@@ -78,7 +78,5 @@ body {
 /*    margin-left: 400px;*/
 /*    width: auto;*/
     float: left;
-    display: contents;
-    font-family: fantasy;
-    
+    display: contents;    
 }

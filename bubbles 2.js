@@ -27,15 +27,15 @@ svg_a.append("defs").append("clipPath")
 //
 svg_a.append("g")
   .attr("class", "legendOrdinal")
-  .attr("transform", "translate(20,10)");
+  .attr("transform", "translate(20,4)");
 
 //Define Scales   
 var xScale = d3.scaleSqrt()
-    .domain([0,16]) //Need to redefine this after loading the data
+    .domain([0,3200])
     .range([0, width]);
 
 var yScale = d3.scaleLinear()
-    .domain([0,450]) //Need to redfine this after loading the data
+    .domain([.04, 0.16])
     .range([height, 0]);
 
 //Define Axis
@@ -48,24 +48,23 @@ var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
+var year = 1990;
+
 d3.csv("Data.csv", function(error, data) {
     if (error) throw error;
     console.log(data)
 
     // Define domain for xScale and yScale
-    xScale.domain([0,3200]);
-    yScale.domain([.04, 0.16]);
     //yScale.domain([.7*d3.min(data, function(d) {return d["Pollutant 1990"]; }),2.9*d3.max(data, function(d) {return d["Pollutant 1990"]; })]);
 
     var tipMouseover = function(d) {
         //console.log(d);
 
         var MSA = "MSA: "
-        var REG = "Region: "
-        var PV = "O3 concentration(ppm): "
+        var PV = "Pollutant value: "
         var POP = "Population: "
-        var PD = "Population Density: "
-        var html  = MSA.bold() + d["Core Based Statistical Area"] + "<br>" + REG.bold() + d["region"] + "<br>"+ PV.bold() + d["Pollutant 1990"] + "<br>" + POP.bold() + d["Population 1990"] + "<br>" + PD.bold() + d["Density 1990"];
+        var PD = "Pop Density: "
+        var html  = MSA.bold() + d["Core Based Statistical Area"] + "<br>" + PV.bold() + d["Pollutant " + year] + "<br>" + POP.bold() + d["Population " + year] + "<br>" + PD.bold() + d["Density " + year];
         tooltip.html(html)
             .style("left", (540) + "px")
             .style("top", (100) + "px")
@@ -74,8 +73,9 @@ d3.csv("Data.csv", function(error, data) {
             .duration(200) // ms
             .style("opacity", .9) // started as 0!
     };
+
     var zoom = d3.zoom()
-      .scaleExtent([1, 32])
+      .scaleExtent([1, 5])
       .on("zoom", zoomed);
     
     function zoomed() {
@@ -84,15 +84,21 @@ d3.csv("Data.csv", function(error, data) {
 //      console.log(d3.event.transform)
         svg_a.select(".x.axis").call(xAxis.scale(new_x_scale));
         svg_a.select(".y.axis").call(yAxis.scale(new_y_scale));
-        svg.selectAll(".dot")
-        .attr("r", function(d) { return Math.sqrt(d["Population 1990"])/75; })
-        .attr("cx", function(d) {return xScale(d["Density 1990"]);})
-        .attr("cy", function(d) {return yScale(d["Pollutant 1990"]);})
-//        .attr("text", function(d) { return xScale(d.gdp); })
+        svg_a.selectAll(".dot")
+        //.attr("r", function(d) { return Math.sqrt(d["Population 1990"])/75; })
+        .attr("cx", function(d) {return new_x_scale(d["Density " + year]);})
+        .attr("cy", function(d) {return new_y_scale(d["Pollutant " + year]);})
         .attr("transform", d3.event.transform)
 };
 
-svg_a.call(zoom);
+    //append zoom area
+    svg_a.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+        .call(zoom);
 
     var tipMouseout = function(d) {
       tooltip.transition()
@@ -101,7 +107,7 @@ svg_a.call(zoom);
     };
     
     function order(a, b) {
-        return +b["Population 1990"] - +a["Population 1990"];
+        return +b["Population " + year] - +a["Population " + year];
     }
     
     //Draw Scatterplot
@@ -109,11 +115,12 @@ svg_a.call(zoom);
         .data(data.sort(order))
         .enter().append("circle")
         .style("opacity", .7)
-    
         .attr("class", "dot")
-        .attr("r", function(d) { return Math.sqrt(d["Population 1990"])/75; })
-        .attr("cx", function(d) {return xScale(d["Density 1990"]);})
-        .attr("cy", function(d) {return yScale(d["Pollutant 1990"]);})
+        .attr("msanum", function (d) { return d["MSA GEOID"]; })
+        .attr("region", function (d) { return d["region"]; })
+        .attr("r", function(d) { return Math.sqrt(d["Population " + year])/75; })
+        .attr("cx", function(d) {return xScale(d["Density " + year]);})
+        .attr("cy", function(d) {return yScale(d["Pollutant " + year]);})
         .style("fill", function (d) { return colors(d["region"]); })
         .attr("clip-path", "url(#clip)")
         .on("mouseover", tipMouseover)
@@ -126,7 +133,7 @@ svg_a.call(zoom);
         .call(xAxis)
         .append("text")
         .attr("class", "label")
-        .attr("y", 40)
+        .attr("y", 50)
         .attr("x", width/2)
         .style("text-anchor", "middle")
         .attr("font-size", "12px")
@@ -156,6 +163,7 @@ svg_a.call(zoom);
     svg_a.select(".legendOrdinal")
         .call(legendOrdinal);
 })
+
 //https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
 var slider2 = d3.sliderHorizontal()
     .min(1990)
@@ -164,30 +172,36 @@ var slider2 = d3.sliderHorizontal()
     .width(700)
     .tickFormat(d3.format("d"))
     .on('onchange', val => {
+        year = +val;
         d3.select("p#value2").text(val);
         var tipMouseover = function(d) {
-        //console.log(d);
-        var MSA = "MSA: "
-        var REG = "Region: "
-        var PV = "O3 concentration(ppm): "
-        var POP = "Population: "
-        var PD = "Population Density: "
-        var html  = MSA.bold() + d["Core Based Statistical Area"] + "<br>" + REG.bold() + d["region"] + "<br>"+ PV.bold() + d["Pollutant " + val] + "<br>" + POP.bold() + d["Population " + val] + "<br>" + PD.bold() + d["Density " + val];
-        tooltip.html(html)
-            .style("left", (540) + "px")
-            .style("top", (100) + "px")
-            //.style("left", (d3.event.pageX) + "px")
-            //.style("top", (d3.event.pageY - 15) + "px")
-            //.style("background-color", colors(d.country))
-            .transition()
-            .duration(200) // ms
-            .style("opacity", .9) // started as 0!
+            //Trying to decrease opacity of other dots when hovering
+            //https://stackoverflow.com/questions/39564878/opacity-update-on-all-d3-svg-circles-except-for-the-class-hovered
+            var geoId = d3.select(this).attr("msanum");
+            var region = d3.select(this).attr("region");
+            svg_a.selectAll(".dot")
+                .attr("opacity", 0.3);
+            svg_a.selectAll(".dot[msanum='" + geoId + "']")
+                .attr("opacity", 1)
+            
+            //console.log(d);
+            var html  = "MSA:" + d["Core Based Statistical Area"] + "<br>Pollutant value: " + d["Pollutant " + val] + "<br>Population: " + d["Population " + val] + "<br>Pop Density: " + d["Density " + val];
+            tooltip.html(html)
+                .style("left", (540) + "px")
+                .style("top", (100) + "px")
+                //.style("left", (d3.event.pageX) + "px")
+                //.style("top", (d3.event.pageY - 15) + "px")
+                //.style("background-color", colors(d.country))
+                .transition()
+                .duration(200) // ms
+                .style("opacity", .9) // started as 0!
         };
-        svg_a.selectAll(".dot")
+        svg_a.selectAll(".dot") //svg_a.selectAll(".dot[region='Mideast']")
             .attr("class", "dot")
             .attr("r", function(d) { return Math.sqrt(d["Population " + val])/75; })
             .attr("cx", function(d) {return xScale(d["Density " + val]);})
             .attr("cy", function(d) {return yScale(d["Pollutant " + val]);})
+            .attr("clip-path", "url(#clip)")
             .attr("id","slider_div")
             .on("mouseover", tipMouseover);
     });
@@ -201,4 +215,4 @@ var g = d3.select("div#slider2").append("svg")
 
 g.call(slider2);
 
-d3.select(".label").text((slider2.value()));
+d3.select("p#value2").text((slider2.value()));
