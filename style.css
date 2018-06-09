@@ -15,14 +15,24 @@ body {
 .dot {
   stroke: #000;
 }
+#chart {
+    width: 960px;
+    float: left;
+}
+
+#maps {
+    width: 20px;
+    float: right;
+}
+
 .map1 {
-/*    float: left;*/
-    position: fixed;
+    float: right;
+/*    position: fixed;*/
 }
 
 .map2 {
-/*    float: left;*/
-    position: relative;
+    float: right;
+/*    position: relative;*/
 }
 
 /*Add Tooltip Type here*/
@@ -65,8 +75,10 @@ body {
 }
 .col-sm-2{
 /*    background: black;*/
-    margin-left: 400px;
-    width: auto;
+/*    margin-left: 400px;*/
+/*    width: auto;*/
+    float: left;
+    display: contents;
     font-family: fantasy;
     
 }

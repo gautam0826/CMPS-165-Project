@@ -126,7 +126,7 @@ svg_a.call(zoom);
         .call(xAxis)
         .append("text")
         .attr("class", "label")
-        .attr("y", 50)
+        .attr("y", 40)
         .attr("x", width/2)
         .style("text-anchor", "middle")
         .attr("font-size", "12px")
@@ -201,4 +201,4 @@ var g = d3.select("div#slider2").append("svg")
 
 g.call(slider2);
 
-d3.select("p#value2").text((slider2.value()));
+d3.select(".label").text((slider2.value()));
