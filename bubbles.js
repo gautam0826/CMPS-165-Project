@@ -1,4 +1,6 @@
 //Define Margin
+      console.log("wtfff");
+
 var margin = {left: 80, right: 80, top: 50, bottom: 50 }, 
     width = 960 - margin.left -margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -83,7 +85,7 @@ d3.csv("EPA20002010CensusCombined2.csv", function(error, data) {
     
 
     //Draw Scatterplot
-    svg_a.selectAll(".dot")
+    var dots = svg_a.selectAll(".dot")
         .data(data)
         .enter().append("circle")
         .attr("class", "dot")
@@ -92,8 +94,17 @@ d3.csv("EPA20002010CensusCombined2.csv", function(error, data) {
         .attr("cy", function(d) {return yScale(d.EPA);})
         .style("fill", function (d) { return colors(d.country); })
         .attr("clip-path", "url(#clip)")
-        .on("mouseover", tipMouseover)
-        .on("mouseout", tipMouseout);
+        .on("mouseover", tipMouseover)        
+        .on("mouseout", tipMouseout)
+        .on("click", function(){
+            
+            d3.selectAll("circle")
+                .style("opacity", 0.1);
+            d3.select(this)
+                .style("opacity", 1);
+            });
+    
+    
     //Add .on("mouseover", .....
     //Add Tooltip.html with transition and style
     //Then Add .on("mouseout", ....

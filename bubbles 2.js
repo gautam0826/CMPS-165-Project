@@ -124,7 +124,23 @@ d3.csv("Data.csv", function(error, data) {
         .style("fill", function (d) { return colors(d["region"]); })
         .attr("clip-path", "url(#clip)")
         .on("mouseover", tipMouseover)
-        .on("mouseout", tipMouseout);
+        .on("mouseout", tipMouseout)
+        .on("click", function(){
+            var clicked = true;
+            if(clicked){
+                d3.selectAll(".dot")
+                .style("opacity", 0.1);
+            d3.select(this)
+                .style("opacity", 1);    
+            this.clicked = false;
+            }
+            
+//            d3.selectAll(".dot")
+//                .style("opacity", 0.1);
+//            d3.select(this)
+//                .style("opacity", 1);
+            });
+    
 
     //x-axis
     svg_a.append("g")
