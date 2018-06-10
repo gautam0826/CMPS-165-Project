@@ -56,6 +56,7 @@ d3.csv("Data.csv", function(error, data) {
 
     // Define domain for xScale and yScale
     //yScale.domain([.7*d3.min(data, function(d) {return d["Pollutant 1990"]; }),2.9*d3.max(data, function(d) {return d["Pollutant 1990"]; })]);
+    var clicked = false;
 
     var tipMouseover = function(d) {
         //console.log(d);
@@ -71,7 +72,13 @@ d3.csv("Data.csv", function(error, data) {
             //.style("background-color", colors(d.country))
             .transition()
             .duration(200) // ms
-            .style("opacity", .9) // started as 0!
+            .style("opacity", .9) // started as 0!            
+
+            d3.selectAll(".dot")
+                .style("opacity", 0.1);
+            d3.select(this)
+                .style("opacity", 1);    
+
     };
 
     var zoom = d3.zoom()
@@ -104,7 +111,23 @@ d3.csv("Data.csv", function(error, data) {
       tooltip.transition()
           .duration(300) // ms
           .style("opacity", 0); // don't care about position!
+        if(!clicked){
+            d3.selectAll(".dot")
+                .style("opacity", 1);
+        }
+        
     };
+       
+    var click = function(d){
+            clicked = !clicked;
+            if(clicked){
+                d3.selectAll(".dot")
+                .style("opacity", 0.1);
+            d3.select(this)
+                .style("opacity", 1);    
+            }
+            
+        }
     
     function order(a, b) {
         return +b["Population " + year] - +a["Population " + year];
@@ -122,26 +145,11 @@ d3.csv("Data.csv", function(error, data) {
         .attr("cx", function(d) {return xScale(d["Density " + year]);})
         .attr("cy", function(d) {return yScale(d["Pollutant " + year]);})
         .style("fill", function (d) { return colors(d["region"]); })
-        .attr("clip-path", "url(#clip)")
+        .attr("clip-path", "url(#clip)")        
         .on("mouseover", tipMouseover)
-        .on("mouseout", tipMouseout)
-        .on("click", function(){
-            var clicked = true;
-            if(clicked){
-                d3.selectAll(".dot")
-                .style("opacity", 0.1);
-            d3.select(this)
-                .style("opacity", 1);    
-            this.clicked = false;
-            }
-            
-//            d3.selectAll(".dot")
-//                .style("opacity", 0.1);
-//            d3.select(this)
-//                .style("opacity", 1);
-            });
-    
-
+        .on("mouseout", tipMouseout)            
+        .on("click", click);
+ 
     //x-axis
     svg_a.append("g")
         .attr("class", "x axis")
@@ -178,6 +186,7 @@ d3.csv("Data.csv", function(error, data) {
 
     svg_a.select(".legendOrdinal")
         .call(legendOrdinal);
+        
 })
 
 //https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
@@ -219,7 +228,7 @@ var slider2 = d3.sliderHorizontal()
             .attr("cy", function(d) {return yScale(d["Pollutant " + val]);})
             .attr("clip-path", "url(#clip)")
             .attr("id","slider_div")
-            .on("mouseover", tipMouseover);
+//            .on("mouseover", tipMouseover);
     });
 
 var g = d3.select("div#slider2").append("svg")
