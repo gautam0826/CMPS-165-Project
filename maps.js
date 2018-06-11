@@ -76,22 +76,22 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 					   		
 					   if (far_west.has(state)) {
 					       //If value exists…
-						   return "rgb(169,50,38)";
+						   return colors("Far West"); //"rgb(169,50,38)";
 					   } else if(rocky_mountain.has(state)) {
 					   		//If value is undefined…
-						   	return "rgb(203,67,53)";
+						   	return colors("Rocky Mountain"); //"rgb(203,67,53)";
 					   } else if(plains.has(state)) {
-                            return "rgb(136,78,160)";
+                            return colors("Plains"); //"rgb(136,78,160)";
                        } else if(southwest.has(state)) {
-                            return "rgb(125,60,152)";
+                            return colors("Southwest"); //"rgb(125,60,152)";
                        } else if(great_lakes.has(state)) {
-                            return "rgb(36,113,163)";
+                            return colors("Great Lakes"); //"rgb(36,113,163)";
                        } else if(southeast.has(state)) {
-                            return "rgb(46, 134, 193)";
+                            return colors("Southeast"); //"rgb(46, 134, 193)";
                        } else if(mideast.has(state)) {
-                            return "rgb(23,165,137)";
+                            return colors("Mideast"); //"rgb(23,165,137)";
                        } else if(new_england.has(state)) {
-                            return "rgb(19,141,117)";
+                            return colors("New England"); //"rgb(19,141,117)";
                        } else if(hawaii.has(state)) {
                             return "rgb(34,153,84)";
                        } else {
@@ -134,22 +134,22 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 					   		
 					   if (far_west.has(state)) {
 					       //If value exists…
-						   return "rgb(169,50,38)";
+						   return colors("Far West"); //"rgb(169,50,38)";
 					   } else if(rocky_mountain.has(state)) {
 					   		//If value is undefined…
-						   	return "rgb(203,67,53)";
+						   	return colors("Rocky Mountain"); //"rgb(203,67,53)";
 					   } else if(plains.has(state)) {
-                            return "rgb(136,78,160)";
+                            return colors("Plains"); //"rgb(136,78,160)";
                        } else if(southwest.has(state)) {
-                            return "rgb(125,60,152)";
+                            return colors("Southwest"); //"rgb(125,60,152)";
                        } else if(great_lakes.has(state)) {
-                            return "rgb(36,113,163)";
+                            return colors("Great Lakes"); //"rgb(36,113,163)";
                        } else if(southeast.has(state)) {
-                            return "rgb(46, 134, 193)";
+                            return colors("Southeast"); //"rgb(46, 134, 193)";
                        } else if(mideast.has(state)) {
-                            return "rgb(23,165,137)";
+                            return colors("Mideast"); //"rgb(23,165,137)";
                        } else if(new_england.has(state)) {
-                            return "rgb(19,141,117)";
+                            return colors("New England"); //"rgb(19,141,117)";
                        } else if(hawaii.has(state)) {
                             return "rgb(34,153,84)";
                        } else {
