@@ -240,6 +240,17 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            })
                            .on("click", function(d){
                                 //console.log(this);
+                                console.log(d);
+                                //"click" function
+                                //clicked = !clicked;
+                                //if(clicked){
+                                d3.selectAll(".dot")
+                                    .style("opacity", 0.1);
+                                var dot_id = "d_" + d.properties.geoid;
+                                var dot_elt = document.getElementById(dot_id);
+                                console.log(dot_elt);
+                                d3.select(dot_elt).style("opacity", 1);
+                                //}
                                 d3.select(this).style("fill", "yellow");
                                 //console.log(this.id);
                                 //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
@@ -305,10 +316,20 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            })
                            .on("click", function(d){
                                 //console.log(this);
+                                console.log(d);
+                                //"click" function
+                                //clicked = !clicked;
+                                //if(clicked){
+                                d3.selectAll(".dot")
+                                    .style("opacity", 0.1);
+                                var dot_id = "d_" + d.properties.geoid;
+                                var dot_elt = document.getElementById(dot_id);
+                                d3.select(dot_elt).style("opacity", 1);
+                                //}
                                 d3.select(this).style("fill", "yellow");
                                 //console.log(this.id);
                                 //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-                                var id = "1" + this.id.substr(1, this.id.length);
+                                var id = "2" + this.id.substr(1, this.id.length);
                                 //console.log(id);
                                 //id[0] = '2';
                                 //console.log(id);

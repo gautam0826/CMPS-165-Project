@@ -30,6 +30,7 @@ svg_a.append("g")
   .attr("transform", "translate(20,4)");
 
 //Define Scales   
+//Teacher wanted a log scale...
 var xScale = d3.scaleSqrt()
     .domain([0,3200])
     .range([0, width]);
@@ -139,6 +140,9 @@ d3.csv("Data.csv", function(error, data) {
         .enter().append("circle")
         .style("opacity", .7)
         .attr("class", "dot")
+        .attr("id", function(d) {
+            return "d_" + d.MSA_GEOID;
+        })
         .attr("msanum", function (d) { return d["MSA GEOID"]; })
         .attr("region", function (d) { return d["region"]; })
         .attr("r", function(d) { return Math.sqrt(d["Population " + year])/75; })
