@@ -40,10 +40,28 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                           .attr("width", w)
                           .attr("height", h);
 
+
             //Load in GeoJSON data
 			d3.json("us-regions.json", function(json) {
                 var numRegionsSelected = 0;
                 
+                function circleSelected(){
+                        var tempvaluecircleselection = 0;
+                    d3.selectAll(".dot").each( function(d, i){
+                        var elt = d3.select(this);
+                        var cx = elt.attr("cx")
+                        if (cx != null){
+                            //console.log(elt)
+                            var opacity = elt.style("opacity")
+                            //console.log(opacity)
+                            if (opacity != 0.7) {
+                                tempvaluecircleselection++;
+                            }
+                        }
+                        //console.log(elt.attr("opacity") > 0)
+                    });
+                    return (tempvaluecircleselection != 0);
+                };
                 /* //add a toggle variable and a selection id
                 for(var i = 0; i < json.features.length; i++){
                     json.features[i].properties.selected = 0;
@@ -65,16 +83,11 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 					.style("fill", "rgb(237,237,237)")
                     .attr("clicked", 0)
                     .on("click", function(d){
-                        //console.log(this);
-                        //d3.selectAll(".mass").filter(function(d) { console.log(d) }).style("fill", "rgb(211,211,211)");
+                        //var circleSelected = ;
+                        console.log(circleSelected())
                         var id = "2" + this.id.substr(1, this.id.length);
-                        //console.log(id);
-                        //id[0] = '2';
-                        console.log(this.id);
                         var elt = document.getElementById(id);
                         clicked = (d3.select(this).attr("clicked") == 0) && (d3.select(elt).attr("clicked") == 0);
-                        console.log((d3.select(this).attr("clicked") == 0))
-                        console.log((d3.select(elt).attr("clicked") == 0))
                         if(!clicked){
                             numRegionsSelected--;
                             d3.select(this).attr("clicked", 0);
@@ -91,9 +104,6 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             return;
                         }
                         d3.select(this).style("fill", "rgb(211,211,211)");
-                        //console.log(this.id);
-                        //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-                        //console.log(elt);
                         d3.select(elt).style("fill", "rgb(211,211,211)");
                         if (numRegionsSelected == 0)
                         {
@@ -102,8 +112,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                         }
                          d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
                              .style("opacity", 1);
-                            d3.select(this).attr("clicked", 1);
-                            d3.select(elt).attr("clicked", 1);
+                         d3.select(this).attr("clicked", 1);
+                         d3.select(elt).attr("clicked", 1);
                          numRegionsSelected++;
                     })
                     .append("title")
@@ -126,12 +136,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 					.style("fill", "rgb(237,237,237)")
                     .attr("clicked", 0)
                     .on("click", function(d){
-                     clickedEver = true;
-                        //console.log(this);
                         var id = "1" + this.id.substr(1, this.id.length);
-                        //console.log(id);
-                        //id[0] = '2';
-                        //console.log(id);
                         var elt = document.getElementById(id);
                         clicked = (d3.select(this).attr("clicked") == 0) && (d3.select(elt).attr("clicked") == 0);
                         if(!clicked){
@@ -150,10 +155,6 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             return;
                         }
                         d3.select(this).style("fill", "rgb(211,211,211)");
-                        //console.log(this.id);
-                        //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-
-                        //console.log(elt);
                         d3.select(elt).style("fill", "rgb(211,211,211)");
                         if (numRegionsSelected == 0)
                         {
@@ -185,6 +186,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            .attr("id", function(d) {
                                 return "1_" + d.properties.name;
                            })
+                            .attr("clicked", 0)
                             .attr("stroke", "#222")
                             .attr("stroke-width", 0.05)
                            //.attr("class", "mass")
@@ -197,18 +199,16 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                               return color_1(value_1);
                            })
                            .on("click", function(d){
-                                //console.log(this);
                                 console.log(d);
-                                //"click" function
-                                //clicked = !clicked;
-                                //if(clicked){
-                                d3.selectAll(".dot")
-                                    .style("opacity", 0.1);
+
+                                if (!circleSelected()){
+                                    d3.selectAll(".dot")
+                                        .style("opacity", 0.1);
+                                }
                                 var dot_id = "d_" + d.properties.geoid;
                                 var dot_elt = document.getElementById(dot_id);
                                 console.log(dot_elt);
                                 d3.select(dot_elt).style("opacity", 1);
-                                //}
                                 d3.select(this).style("fill", "yellow");
                                 //console.log(this.id);
                                 //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
@@ -235,6 +235,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            .attr("id", function(d) {
                                 return "2_" + d.properties.name;
                            })
+                            .attr("clicked", 0)
                             .attr("stroke", "#222")
                             .attr("stroke-width", 0.05)
                            //.attr("class", "mass")
@@ -252,8 +253,10 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 //"click" function
                                 //clicked = !clicked;
                                 //if(clicked){
-                                d3.selectAll(".dot")
-                                    .style("opacity", 0.1);
+                                if (!circleSelected()){
+                                    d3.selectAll(".dot")
+                                        .style("opacity", 0.1);
+                                }
                                 var dot_id = "d_" + d.properties.geoid;
                                 var dot_elt = document.getElementById(dot_id);
                                 d3.select(dot_elt).style("opacity", 1);
@@ -261,7 +264,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 d3.select(this).style("fill", "yellow");
                                 //console.log(this.id);
                                 //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-                                var id = "2" + this.id.substr(1, this.id.length);
+                                var id = "1" + this.id.substr(1, this.id.length);
                                 //console.log(id);
                                 //id[0] = '2';
                                 //console.log(id);
