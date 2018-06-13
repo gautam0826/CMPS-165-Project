@@ -136,7 +136,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     })
                     .append("title")
                     .text(function (d) {
-                        return d.properties.name; 
+                        return d.properties.region; 
                     });
                 
                 //Bind data and create one path per GeoJSON feature
@@ -191,7 +191,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     })
                     .append("title")
                     .text(function(d) {
-                        return d.properties.name;
+                        return d.properties.region;
                     });
 			
 				
