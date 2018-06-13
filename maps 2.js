@@ -215,7 +215,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            .attr("class", function(d) {
                               //Get data value
 					   		  //var value = d.properties.value;
-                              return "mass " +d.properties.region})
+                              return "mass msa1 " +d.properties.region})
 					       .style("fill", function(d) {
 					   		  var value_1 = d.properties["Density " + year];
                               return color_1(value_1);
@@ -264,7 +264,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            .attr("class", function(d) {
                               //Get data value
 					   		  //var value = d.properties.value;
-                              return "mass " +d.properties.region})
+                              return "mass msa2 " +d.properties.region})
 					       .style("fill", function(d) {
 					   		  var value_2 = d.properties["Pollutant " + year];
                               return color_2(value_2);
