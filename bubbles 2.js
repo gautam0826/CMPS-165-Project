@@ -8,6 +8,14 @@ var colors = d3.scaleOrdinal()
   .domain(["Mideast", "Great Lakes", "Southwest", "Southeast", "Far West", "Plains", "Rocky Mountain", "New England"])
   .range(d3.schemeCategory10);
 
+var color_1 = d3.scaleSqrt()
+    .domain([0,3200])
+    .range(d3.schemeOrRd[3]);
+
+var color_2 = d3.scaleLinear()
+    .domain([.04, 0.16])
+    .range(d3.schemeBlues[3]);
+
 //Define SVG
 var svg_a = d3.select("div#chart")
     .append("svg")
@@ -277,8 +285,19 @@ var slider2 = d3.sliderHorizontal()
             .attr("r", function(d) { return Math.sqrt(d["Population " + val])/75; })
             .attr("cx", function(d) {return xScale(d["Density " + val]);})
             .attr("cy", function(d) {return yScale(d["Pollutant " + val]);})
-            .attr("clip-path", "url(#clip)")
+            .attr("clip-path", "url(#clip)");
 //            .on("mouseover", tipMouseover);
+        d3.selectAll(".mass[class*=msa1]")
+			.style("fill", function(d) {
+				  var value_1 = d.properties["Density " + val];
+                  return color_1(value_1);
+            });
+        d3.selectAll(".mass[class*=msa2]")
+			.style("fill", function(d) {
+				  var value_2 = d.properties["Pollutant " + val];
+                  return color_2(value_2);
+            });        //d3.selectAll(".mass")
+        //    .style("fill", "blue");
     });
 
 var g = d3.select("div#slider2").append("svg")
