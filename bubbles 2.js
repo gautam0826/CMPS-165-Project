@@ -100,8 +100,6 @@ d3.csv("Data.csv", function(error, data) {
 
     // Define domain for xScale and yScale
     //yScale.domain([.7*d3.min(data, function(d) {return d["Pollutant 1990"]; }),2.9*d3.max(data, function(d) {return d["Pollutant 1990"]; })]);
-    var clicked = false;
-
     var tipMouseover = function(d) {
         //console.log(d);
 
@@ -163,8 +161,10 @@ d3.csv("Data.csv", function(error, data) {
     };
        
     var click = function(d){
-            clicked = !clicked;
+        console.log(this)
+            clicked = d3.select(this).attr("clicked") == 0;
             if(clicked){
+                d3.select(this).attr("clicked", 1);
             if (!circleSelected())
             {
                 d3.selectAll(".dot")
@@ -174,12 +174,14 @@ d3.csv("Data.csv", function(error, data) {
                 .style("opacity", 1);    
             }
             if (!clicked){
+                d3.select(this).attr("clicked", 0);
                 d3.select(this)
                     .style("opacity", .1);    
                 if (!circleSelected2()){
                     d3.selectAll(".dot")
                         .style("opacity", .7);
-                }
+                d3.select(this)
+                    .style("opacity", .7);                 }
                 else{
                     d3.select(this)
                         .style("opacity", .1);    
@@ -202,6 +204,7 @@ d3.csv("Data.csv", function(error, data) {
         })
         .attr("msanum", function (d) { return d["MSA GEOID"]; })
         .attr("region", function (d) { return d["region"]; })
+        .attr("clicked", 0)
         .attr("r", function(d) { return Math.sqrt(d["Population " + year])/75; })
         .attr("cx", function(d) {return xScale(d["Density " + year]);})
         .attr("cy", function(d) {return yScale(d["Pollutant " + year]);})

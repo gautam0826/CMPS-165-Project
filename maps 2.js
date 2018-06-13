@@ -114,7 +114,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             d3.select(elt).style("fill", "rgb(237,237,237)");
                             d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
                              .style("opacity", 0.1);
-                            if (numRegionsSelected == 0)
+                            if (!circleSelected2())
                             {
                                 d3.selectAll(".dot")
                                     .style("opacity", 0.7);                                
@@ -123,7 +123,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                         }
                         d3.select(this).style("fill", "rgb(211,211,211)");
                         d3.select(elt).style("fill", "rgb(211,211,211)");
-                        if (numRegionsSelected == 0 && !circleSelected())
+                        if (!circleSelected())
                         {
                             d3.selectAll(".dot")
                                 .style("opacity", 0.1);                                
@@ -165,7 +165,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             d3.select(elt).style("fill", "rgb(237,237,237)");
                             d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
                              .style("opacity", 0.1);
-                            if (numRegionsSelected == 0 && !circleSelected2())
+                            if (!circleSelected2())
                             {
                                 d3.selectAll(".dot")
                                     .style("opacity", 0.7);                 
@@ -178,7 +178,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                         }
                         d3.select(this).style("fill", "rgb(211,211,211)");
                         d3.select(elt).style("fill", "rgb(211,211,211)");
-                        if (numRegionsSelected == 0 && !circleSelected())
+                        if (!circleSelected()) //(numRegionsSelected == 0 && !circleSelected())
                         {
                             d3.selectAll(".dot")
                                 .style("opacity", 0.1);                                
