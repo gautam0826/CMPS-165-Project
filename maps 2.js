@@ -237,30 +237,25 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 console.log(dot_elt);
                                 d3.select(dot_elt).style("opacity", 1);
                                 d.properties.selected = !d.properties.selected;
+                           
+                                //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
+                                var id = "2" + this.id.substr(1, this.id.length);
+                                //console.log(id);
+                                //id[0] = '2';
+                                //console.log(id);
+                                var elt = document.getElementById(id);
+                                //console.log(elt);
+                           
                                 if(d.properties.selected){
                                     d3.select(this).style("fill", "yellow");
                                     //console.log(this.id);
-                                    //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-                                    var id = "2" + this.id.substr(1, this.id.length);
-                                    //console.log(id);
-                                    //id[0] = '2';
-                                    //console.log(id);
-                                    var elt = document.getElementById(id);
-                                    //console.log(elt);
+                                    
                                     d3.select(elt).style("fill", "yellow");
                                 } else{
                                     d3.select(this).style("fill", function(d){
                                         var value_1 = d.properties["Density " + year];
                                         return color_1(value_1);
                                     });
-                                    //console.log(this.id);
-                                    //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-                                    var id = "2" + this.id.substr(1, this.id.length);
-                                    //console.log(id);
-                                    //id[0] = '2';
-                                    //console.log(id);
-                                    var elt = document.getElementById(id);
-                                    //console.log(elt);
                                     d3.select(elt).style("fill", function(d){
                                         var value_2 = d.properties["Pollutant " + year];
                                         return color_2(value_2);
@@ -309,30 +304,24 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 console.log(dot_elt);
                                 d3.select(dot_elt).style("opacity", 1);
                                 d.properties.selected = !d.properties.selected;
+                           
+                                //console.log(this.id);
+                                //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
+                                var id = "1" + this.id.substr(1, this.id.length);
+                                //console.log(id);
+                                //id[0] = '2';
+                                //console.log(id);
+                                var elt = document.getElementById(id);
+                                //console.log(elt);
+                           
                                 if(d.properties.selected){
                                     d3.select(this).style("fill", "yellow");
-                                    //console.log(this.id);
-                                    //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-                                    var id = "1" + this.id.substr(1, this.id.length);
-                                    //console.log(id);
-                                    //id[0] = '2';
-                                    //console.log(id);
-                                    var elt = document.getElementById(id);
-                                    //console.log(elt);
                                     d3.select(elt).style("fill", "yellow");
                                 } else{
                                     d3.select(this).style("fill", function(d){
                                         var value_2 = d.properties["Pollutant " + year];
                                         return color_2(value_2);
                                     });
-                                    //console.log(this.id);
-                                    //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-                                    var id = "1" + this.id.substr(1, this.id.length);
-                                    //console.log(id);
-                                    //id[0] = '2';
-                                    //console.log(id);
-                                    var elt = document.getElementById(id);
-                                    //console.log(elt);
                                     d3.select(elt).style("fill", function(d){
                                         var value_1 = d.properties["Density " + year];
                                         return color_1(value_1);
