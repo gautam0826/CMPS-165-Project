@@ -178,15 +178,15 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     //Load in csv data parralel to it
                     d3.csv("Data.csv", function(csv) {
                     //Load in GeoJSON data
-				    d3.json("cb_2013_us_cbsa_5m.json", function(json_2) {
-
+				    d3.csv("cb_2013_us_cbsa_5m.csv", function(csv_2) {
+                        //console.log(csv_2);
                         //bind data to json
                         for(var i = 0; i < csv.length; i++){
                             var c_geoid = csv[i].MSA_GEOID;
-                            for(var j = 0; j < json_2.features.length; j++){
-                                if(c_geoid == json_2.features[j].properties.geoid){
-                                    json_2.features[j].properties.pol90 = csv[i]["Pollutant 1990"];
-                                    json_2.features[j].properties.pop90 = csv[i]["Population 1990"];
+                            for(var j = 0; j < csv_2.length; j++){
+                                if(c_geoid == csv_2[j].geoid){
+                                    csv_2[j].pol90 = csv[i]["Pollutant 1990"];
+                                    csv_2[j].pop90 = csv[i]["Population 1990"];
                                     break;
                                 }
                             }
@@ -194,18 +194,23 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                         
 					   //Bind data and create one path per GeoJSON feature
 					   svg.selectAll("path")
-					       .data(json_2.features)
+					       .data(csv_2)
 					       .enter()
 					       .append("path")
-					       .attr("d", path)
+					       .attr("d", function(d){
+                                console.log(d);
+                                var out = path(d.the_geom);
+                                console.log(out);
+                                return d.the_geom;
+                            })
                            .attr("id", function(d) {
-                                return "1_" + d.properties.name;
+                                return "1_" + d.name;
                            })
                            //.attr("class", "mass")
                            .attr("class", function(d) {
                               //Get data value
 					   		  //var value = d.properties.value;
-                              var name = d.properties.name;
+                              var name = d.name;
                               var state = name.substr(name.length - 2, name.length);
                               //console.log(name + ", " + state);
                               //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
@@ -235,7 +240,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                   return "mass alaska";
                               }})
 					       .style("fill", function(d) {
-					   		  var value_1 = d.properties.pol90;
+					   		  var value_1 = d.pol90;
                               return color_1(value_1);
                            })
                            .on("click", function(d){
@@ -246,7 +251,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 //if(clicked){
                                 d3.selectAll(".dot")
                                     .style("opacity", 0.1);
-                                var dot_id = "d_" + d.properties.geoid;
+                                var dot_id = "d_" + d.geoid;
                                 var dot_elt = document.getElementById(dot_id);
                                 console.log(dot_elt);
                                 d3.select(dot_elt).style("opacity", 1);
@@ -264,24 +269,26 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             })
                             .append("title")
                             .text(function(d) {
-                                return d.properties.name;
+                                return d.name;
                             });
                 
                 
                         //Bind data and create one path per GeoJSON feature
 					   svg_2.selectAll("path")
-					       .data(json_2.features)
+					       .data(csv_2)
 					       .enter()
 					       .append("path")
-					       .attr("d", path)
+					       .attr("d", function(d){
+                                return path(d.the_geom);
+                           })
                            .attr("id", function(d) {
-                                return "2_" + d.properties.name;
+                                return "2_" + d.name;
                            })
                            //.attr("class", "mass")
                            .attr("class", function(d) {
                               //Get data value
 					   		  //var value = d.properties.value;
-                              var name = d.properties.name;
+                              var name = d.name;
                               var state = name.substr(name.length - 2, name.length);
                               //console.log(name + ", " + state);
                               //far_west, rocky_mountain, plains, southwest, great_lakes, southeast, mideast, new_england, hawaii, alaska
@@ -311,7 +318,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                   return "mass alaska";
                               }})
 					       .style("fill", function(d) {
-					   		  var value_2 = d.properties.pop90;
+					   		  var value_2 = d.pop90;
                               return color_2(value_2);
                            })
                            .on("click", function(d){
@@ -322,7 +329,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 //if(clicked){
                                 d3.selectAll(".dot")
                                     .style("opacity", 0.1);
-                                var dot_id = "d_" + d.properties.geoid;
+                                var dot_id = "d_" + d.geoid;
                                 var dot_elt = document.getElementById(dot_id);
                                 d3.select(dot_elt).style("opacity", 1);
                                 //}
@@ -339,7 +346,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             })
                             .append("title")
                             .text(function(d) {
-                                return d.properties.name;
+                                return d.name;
                             });
                         
                             /*svg.append("text")
