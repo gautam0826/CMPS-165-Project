@@ -114,7 +114,7 @@ d3.csv("Data.csv", function(error, data) {
           .style("opacity", 0); // don't care about position!
         if(!clicked){
             d3.selectAll(".dot")
-                .style("opacity", 1);
+                .style("opacity", .7);
         }
         
     };
