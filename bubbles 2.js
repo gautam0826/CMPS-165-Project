@@ -75,10 +75,10 @@ d3.csv("Data.csv", function(error, data) {
             .duration(200) // ms
             .style("opacity", .9) // started as 0!            
 
-            d3.selectAll(".dot")
-                .style("opacity", 0.1);
-            d3.select(this)
-                .style("opacity", 1);    
+            //d3.selectAll(".dot")
+            //    .style("opacity", 0.1);
+            //d3.select(this)
+            //    .style("opacity", 1);    
 
     };
 
@@ -112,10 +112,10 @@ d3.csv("Data.csv", function(error, data) {
       tooltip.transition()
           .duration(300) // ms
           .style("opacity", 0); // don't care about position!
-        if(!clicked){
-            d3.selectAll(".dot")
-                .style("opacity", .7);
-        }
+        //if(!clicked){
+            //d3.selectAll(".dot")
+            //    .style("opacity", .7);
+        //}
         
     };
        
@@ -127,7 +127,10 @@ d3.csv("Data.csv", function(error, data) {
             d3.select(this)
                 .style("opacity", 1);    
             }
-            
+            if (!clicked){
+             d3.selectAll(".dot")
+                .style("opacity", .7);
+            }
         }
     
     function order(a, b) {
@@ -151,7 +154,7 @@ d3.csv("Data.csv", function(error, data) {
         .style("fill", function (d) { return colors(d["region"]); })
         .attr("clip-path", "url(#clip)")        
         .on("mouseover", tipMouseover)
-        .on("mouseout", tipMouseout)            
+        .on("mouseout", tipMouseout)
         .on("click", click);
  
     //x-axis
@@ -206,12 +209,10 @@ var slider2 = d3.sliderHorizontal()
         var tipMouseover = function(d) {
             //Trying to decrease opacity of other dots when hovering
             //https://stackoverflow.com/questions/39564878/opacity-update-on-all-d3-svg-circles-except-for-the-class-hovered
-            var geoId = d3.select(this).attr("msanum");
-            var region = d3.select(this).attr("region");
-            svg_a.selectAll(".dot")
-                .attr("opacity", 0.3);
-            svg_a.selectAll(".dot[msanum='" + geoId + "']")
-                .attr("opacity", 1)
+            //d3.selectAll(".dot")
+            //    .style("opacity", 0.1);
+            //d3.select(this)
+            //    .style("opacity", 1);  
             
             //console.log(d);
             var html  = "MSA:" + d["Core Based Statistical Area"] + "<br>Pollutant value: " + d["Pollutant " + val] + "<br>Population: " + d["Population " + val] + "<br>Pop Density: " + d["Density " + val];

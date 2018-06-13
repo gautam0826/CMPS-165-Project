@@ -42,12 +42,13 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 
             //Load in GeoJSON data
 			d3.json("us-regions.json", function(json) {
+                var numRegionsSelected = 0;
                 
                 /* //add a toggle variable and a selection id
                 for(var i = 0; i < json.features.length; i++){
                     json.features[i].properties.selected = 0;
                 }*/
-                console.log(json)
+                //console.log(json)
 
 			     //Bind data and create one path per GeoJSON feature
 				 svg.selectAll("path")
@@ -58,25 +59,52 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     .attr("id", function(d){
                         return "1_" + d.properties.region; 
                     })
-                    .attr("class", "mass")
+                    .attr("stroke", "#222")
+                    .attr("stroke-width", 0.04)
+                    .attr("class", "mass mapregion")
 					.style("fill", "rgb(237,237,237)")
+                    .attr("clicked", 0)
                     .on("click", function(d){
                         //console.log(this);
                         //d3.selectAll(".mass").filter(function(d) { console.log(d) }).style("fill", "rgb(211,211,211)");
-                        d3.select(this).style("fill", "rgb(211,211,211)");
-                        //console.log(this.id);
-                        //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
                         var id = "2" + this.id.substr(1, this.id.length);
                         //console.log(id);
                         //id[0] = '2';
                         console.log(this.id);
                         var elt = document.getElementById(id);
+                        clicked = (d3.select(this).attr("clicked") == 0) && (d3.select(elt).attr("clicked") == 0);
+                        console.log((d3.select(this).attr("clicked") == 0))
+                        console.log((d3.select(elt).attr("clicked") == 0))
+                        if(!clicked){
+                            numRegionsSelected--;
+                            d3.select(this).attr("clicked", 0);
+                            d3.select(elt).attr("clicked", 0);
+                            d3.select(this).style("fill", "rgb(237,237,237)");
+                            d3.select(elt).style("fill", "rgb(237,237,237)");
+                            d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
+                             .style("opacity", 0.1);
+                            if (numRegionsSelected == 0)
+                            {
+                                d3.selectAll(".dot")
+                                    .style("opacity", 0.7);                                
+                            }
+                            return;
+                        }
+                        d3.select(this).style("fill", "rgb(211,211,211)");
+                        //console.log(this.id);
+                        //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
                         //console.log(elt);
                         d3.select(elt).style("fill", "rgb(211,211,211)");
-                        d3.selectAll(".dot")
-                             .style("opacity", 0.1);
+                        if (numRegionsSelected == 0)
+                        {
+                            d3.selectAll(".dot")
+                                .style("opacity", 0.1);                                
+                        }
                          d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
                              .style("opacity", 1);
+                            d3.select(this).attr("clicked", 1);
+                            d3.select(elt).attr("clicked", 1);
+                         numRegionsSelected++;
                     })
                     .append("title")
                     .text(function (d) {
@@ -92,24 +120,51 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     .attr("id", function(d) {
                         return "2_" + d.properties.region; 
                     })
-                    .attr("class", "mass")
+                    .attr("stroke", "#222")
+                    .attr("stroke-width", 0.04)
+                    .attr("class", "mass mapregion")
 					.style("fill", "rgb(237,237,237)")
+                    .attr("clicked", 0)
                     .on("click", function(d){
+                     clickedEver = true;
                         //console.log(this);
-                        d3.select(this).style("fill", "rgb(211,211,211)");
-                        //console.log(this.id);
-                        //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
                         var id = "1" + this.id.substr(1, this.id.length);
                         //console.log(id);
                         //id[0] = '2';
                         //console.log(id);
                         var elt = document.getElementById(id);
+                        clicked = (d3.select(this).attr("clicked") == 0) && (d3.select(elt).attr("clicked") == 0);
+                        if(!clicked){
+                            numRegionsSelected--;
+                            d3.select(this).attr("clicked", 0);
+                            d3.select(elt).attr("clicked", 0);
+                            d3.select(this).style("fill", "rgb(237,237,237)");
+                            d3.select(elt).style("fill", "rgb(237,237,237)");
+                            d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
+                             .style("opacity", 0.1);
+                            if (numRegionsSelected == 0)
+                            {
+                                d3.selectAll(".dot")
+                                    .style("opacity", 0.7);                                
+                            }
+                            return;
+                        }
+                        d3.select(this).style("fill", "rgb(211,211,211)");
+                        //console.log(this.id);
+                        //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
+
                         //console.log(elt);
                         d3.select(elt).style("fill", "rgb(211,211,211)");
-                        d3.selectAll(".dot")
-                             .style("opacity", 0.1);
-                         d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
+                        if (numRegionsSelected == 0)
+                        {
+                            d3.selectAll(".dot")
+                                .style("opacity", 0.1);                                
+                        }
+                        d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
                              .style("opacity", 1);
+                            d3.select(this).attr("clicked", 1);
+                            d3.select(elt).attr("clicked", 1);
+                        numRegionsSelected++;
                     })
                     .append("title")
                     .text(function(d) {
@@ -130,6 +185,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            .attr("id", function(d) {
                                 return "1_" + d.properties.name;
                            })
+                            .attr("stroke", "#222")
+                            .attr("stroke-width", 0.05)
                            //.attr("class", "mass")
                            .attr("class", function(d) {
                               //Get data value
@@ -178,6 +235,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            .attr("id", function(d) {
                                 return "2_" + d.properties.name;
                            })
+                            .attr("stroke", "#222")
+                            .attr("stroke-width", 0.05)
                            //.attr("class", "mass")
                            .attr("class", function(d) {
                               //Get data value
