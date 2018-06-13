@@ -105,7 +105,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                         }
                         d3.select(this).style("fill", "rgb(211,211,211)");
                         d3.select(elt).style("fill", "rgb(211,211,211)");
-                        if (numRegionsSelected == 0)
+                        if (numRegionsSelected == 0 && !circleSelected())
                         {
                             d3.selectAll(".dot")
                                 .style("opacity", 0.1);                                
@@ -156,7 +156,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                         }
                         d3.select(this).style("fill", "rgb(211,211,211)");
                         d3.select(elt).style("fill", "rgb(211,211,211)");
-                        if (numRegionsSelected == 0)
+                        if (numRegionsSelected == 0 && !circleSelected())
                         {
                             d3.selectAll(".dot")
                                 .style("opacity", 0.1);                                
@@ -249,10 +249,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            })
                            .on("click", function(d){
                                 //console.log(this);
-                                console.log(d);
-                                //"click" function
-                                //clicked = !clicked;
-                                //if(clicked){
+                                //console.log(d);
                                 if (!circleSelected()){
                                     d3.selectAll(".dot")
                                         .style("opacity", 0.1);
@@ -260,7 +257,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 var dot_id = "d_" + d.properties.geoid;
                                 var dot_elt = document.getElementById(dot_id);
                                 d3.select(dot_elt).style("opacity", 1);
-                                //}
+                                
                                 d3.select(this).style("fill", "yellow");
                                 //console.log(this.id);
                                 //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript

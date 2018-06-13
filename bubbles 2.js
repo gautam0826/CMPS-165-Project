@@ -51,6 +51,24 @@ var tooltip = d3.select("body").append("div")
 
 var year = 1990;
 
+function circleSelected(){
+    var tempvaluecircleselection = 0;
+    d3.selectAll(".dot").each( function(d, i){
+        var elt = d3.select(this);
+        var cx = elt.attr("cx")
+        if (cx != null){
+                //console.log(elt)
+                var opacity = elt.style("opacity")
+                //console.log(opacity)
+                if (opacity != 0.7) {
+                    tempvaluecircleselection++;
+                }
+        }
+        //console.log(elt.attr("opacity") > 0)
+        });
+    return (tempvaluecircleselection != 0);
+};
+
 d3.csv("Data.csv", function(error, data) {
     if (error) throw error;
     console.log(data)
@@ -122,8 +140,11 @@ d3.csv("Data.csv", function(error, data) {
     var click = function(d){
             clicked = !clicked;
             if(clicked){
+            if (!circleSelected())
+            {
                 d3.selectAll(".dot")
-                .style("opacity", 0.1);
+                    .style("opacity", 0.1);
+            }
             d3.select(this)
                 .style("opacity", 1);    
             }
@@ -232,7 +253,6 @@ var slider2 = d3.sliderHorizontal()
             .attr("cx", function(d) {return xScale(d["Density " + val]);})
             .attr("cy", function(d) {return yScale(d["Pollutant " + val]);})
             .attr("clip-path", "url(#clip)")
-            .attr("id","slider_div")
 //            .on("mouseover", tipMouseover);
     });
 
