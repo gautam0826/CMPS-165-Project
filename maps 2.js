@@ -215,6 +215,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             .attr("clicked", 0)
                             .attr("stroke", "#222")
                             .attr("stroke-width", 0.05)
+                            .attr("clicked", 0)
                            //.attr("class", "mass")
                            .attr("class", function(d) {
                               //Get data value
@@ -286,6 +287,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             .attr("clicked", 0)
                             .attr("stroke", "#222")
                             .attr("stroke-width", 0.05)
+                            .attr("clicked", 0)
                            //.attr("class", "mass")
                            .attr("class", function(d) {
                               //Get data value
@@ -311,7 +313,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                     d3.select(this).style("fill", "yellow");
                                     //console.log(this.id);
                                     //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-                                    var id = "2" + this.id.substr(1, this.id.length);
+                                    var id = "1" + this.id.substr(1, this.id.length);
                                     //console.log(id);
                                     //id[0] = '2';
                                     //console.log(id);
@@ -325,7 +327,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                     });
                                     //console.log(this.id);
                                     //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-                                    var id = "2" + this.id.substr(1, this.id.length);
+                                    var id = "1" + this.id.substr(1, this.id.length);
                                     //console.log(id);
                                     //id[0] = '2';
                                     //console.log(id);
