@@ -69,6 +69,23 @@ function circleSelected(){
     return (tempvaluecircleselection != 0);
 };
 
+                function circleSelected2(){
+                        var tempvaluecircleselection = 0;
+                    d3.selectAll(".dot").each( function(d, i){
+                        var elt = d3.select(this);
+                        var cx = elt.attr("cx")
+                        if (cx != null){
+                            //console.log(elt)
+                            var opacity = elt.style("opacity")
+                            //console.log(opacity)
+                            if (opacity != 0.1) {
+                                tempvaluecircleselection++;
+                            }
+                        }
+                        //console.log(elt.attr("opacity") > 0)
+                    });
+                    return (tempvaluecircleselection != 0);
+                };
 d3.csv("Data.csv", function(error, data) {
     if (error) throw error;
     console.log(data)
@@ -149,8 +166,16 @@ d3.csv("Data.csv", function(error, data) {
                 .style("opacity", 1);    
             }
             if (!clicked){
-             d3.selectAll(".dot")
-                .style("opacity", .7);
+                d3.select(this)
+                    .style("opacity", .1);    
+                if (!circleSelected2()){
+                    d3.selectAll(".dot")
+                        .style("opacity", .7);
+                }
+                else{
+                    d3.select(this)
+                        .style("opacity", .1);    
+                }
             }
         }
     

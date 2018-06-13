@@ -62,6 +62,24 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     });
                     return (tempvaluecircleselection != 0);
                 };
+                
+                function circleSelected2(){
+                        var tempvaluecircleselection = 0;
+                    d3.selectAll(".dot").each( function(d, i){
+                        var elt = d3.select(this);
+                        var cx = elt.attr("cx")
+                        if (cx != null){
+                            //console.log(elt)
+                            var opacity = elt.style("opacity")
+                            //console.log(opacity)
+                            if (opacity != 0.1) {
+                                tempvaluecircleselection++;
+                            }
+                        }
+                        //console.log(elt.attr("opacity") > 0)
+                    });
+                    return (tempvaluecircleselection != 0);
+                };
                 /* //add a toggle variable and a selection id
                 for(var i = 0; i < json.features.length; i++){
                     json.features[i].properties.selected = 0;
@@ -147,10 +165,14 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             d3.select(elt).style("fill", "rgb(237,237,237)");
                             d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
                              .style("opacity", 0.1);
-                            if (numRegionsSelected == 0)
+                            if (numRegionsSelected == 0 && !circleSelected2())
                             {
                                 d3.selectAll(".dot")
-                                    .style("opacity", 0.7);                                
+                                    .style("opacity", 0.7);                 
+                            }
+                            else {
+                                d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
+                                    .style("opacity", 0.1);
                             }
                             return;
                         }
