@@ -11,30 +11,23 @@ body {
 
 .bubbles {
 /*    float:left;*/
+  clip-path: url(#clip);
+
 }
 .dot {
   stroke: #000;
+  clip-path: url(#clip);
+
 }
 #chart {
     width: 960px;
     float: left;
 }
 
-.legendThreshold2{
-/*    padding-right: 30px;*/
-    margin-right: 100px;
-}
 #maps {
-    width: 20px;
+    width: 200px;
     float: right;
 }
-
-.maps{
-/*    width: auto;*/
-/*    float: right;*/
-/*    height: auto;*/
-}
-
 
 .map1 {
     float: right;

@@ -9,8 +9,8 @@ var colors = d3.scaleOrdinal()
   .range(d3.schemeCategory10);
 
 			var color_1 = d3.scaleSqrt()
-                                .domain([0,30,750, 1500, 3000])
-                                .range(d3.schemeOrRd[6]);
+                                .domain([0,750, 1500, 3000])
+                                .range(d3.schemeReds[5]);
             var color_2 = d3.scaleLinear()
                                 .domain([.04, .08, .12, .16])
                                 .range(d3.schemeBlues[5]);
@@ -197,6 +197,7 @@ d3.csv("Data.csv", function(error, data) {
         .attr("id", function(d) {
             return "d_" + d.MSA_GEOID;
         })
+        //.data(data.filter(function(d){return +d["Population 1990"] < 1000000;}))
         .attr("msanum", function (d) { return d["MSA GEOID"]; })
         .attr("region", function (d) { return d["region"]; })
         .attr("clicked", 0)
@@ -247,9 +248,11 @@ d3.csv("Data.csv", function(error, data) {
         .call(legendOrdinal);
         
 })
+
+
             var g = svg_a.append("g")
                 .attr("class", "legendThreshold1")
-                .attr("transform", "translate(" + 920 + "," +0 + ")");
+                .attr("transform", "translate(" + (width + margin.left+120) + "," + (margin.top - 20) + ")");
                 g.append("text")
                 .attr("class", "caption")
                 .attr("x", 0)
@@ -258,7 +261,7 @@ d3.csv("Data.csv", function(error, data) {
             
             var g = svg_a.append("g")
                 .attr("class", "legendThreshold2")
-                .attr("transform", "translate(" + 920 + "," + (margin.top + 220) + ")");
+                .attr("transform", "translate(" + (width + margin.left+120) + "," + (margin.top + 220) + ")");
                 g.append("text")
                 .attr("class", "caption")
                 .attr("x", 0)
@@ -266,6 +269,7 @@ d3.csv("Data.csv", function(error, data) {
                 .text("O3 concentration");
             var legend = d3.legendColor()
 //                .labels(function (d) { return labels[d.i]; })
+            .cells(6)
                 .shapePadding(4)
                 .labelFormat(d3.format(","))
                 .scale(color_1);
@@ -273,6 +277,7 @@ d3.csv("Data.csv", function(error, data) {
                 .call(legend);
             var legend_2 = d3.legendColor()
 //                .labels(function (d) { return labels[d.i]; })
+            .cells(5)
                 .shapePadding(4)
                 .labelFormat(d3.format(".2f"))
                 .scale(color_2);
