@@ -87,7 +87,7 @@ body {
 .columns {
     column-count: 4;
 }
-.sources {
+.column {
     text-align: center;
-    height: 200px;
+    height: 250px;
 }

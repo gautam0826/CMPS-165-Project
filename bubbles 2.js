@@ -1,5 +1,5 @@
 //Define Margin
-var margin = {left: 80, right: 440, top: 50, bottom: 50 }, 
+var margin = {left: 80, right: 380, top: 50, bottom: 50 }, 
     width = 1260 - margin.left -margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -221,8 +221,7 @@ d3.csv("Data.csv", function(error, data) {
         .attr("x", width/2)
         .style("text-anchor", "middle")
         .attr("font-size", "12px")
-        .attr("font-weight", "bold")
-        .text("Population Density (Population Per Sq. Mile)");
+        .text("Population Density(Population per Sq. mile)");
 
     //Y-axis
     svg_a.append("g")
@@ -236,8 +235,7 @@ d3.csv("Data.csv", function(error, data) {
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .attr("font-size", "12px")
-        .attr("font-weight", "bold")
-        .text("O3 Concentration (Parts Per Million)");
+        .text("O3 concentration(Parts per million)");
     
     //http://d3-legend.susielu.com/#color-ordinal
     var legendOrdinal = d3.legendColor()
@@ -251,26 +249,23 @@ d3.csv("Data.csv", function(error, data) {
         
 })
 
-
             var g = svg_a.append("g")
                 .attr("class", "legendThreshold1")
-                .attr("transform", "translate(" + (width + margin.left + 75) + "," + (margin.top - 20) + ")");
+                .attr("transform", "translate(" + (width + margin.left+100) + "," + (margin.top - 20) + ")");
                 g.append("text")
                 .attr("class", "caption")
                 .attr("x", 0)
                 .attr("y", -6)
-                .attr("font-weight", "bold")
                 .text("Population Density");
             
             var g = svg_a.append("g")
                 .attr("class", "legendThreshold2")
-                .attr("transform", "translate(" + (width + margin.left + 75) + "," + (margin.top + 220) + ")");
+                .attr("transform", "translate(" + (width + margin.left+100) + "," + (margin.top + 220) + ")");
                 g.append("text")
                 .attr("class", "caption")
                 .attr("x", 0)
                 .attr("y", -6)
-                .attr("font-weight", "bold")
-                .text("O3 Concentration");
+                .text("O3 concentration");
             var legend = d3.legendColor()
 //                .labels(function (d) { return labels[d.i]; })
             .cells(6)
