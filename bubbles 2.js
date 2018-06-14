@@ -221,7 +221,8 @@ d3.csv("Data.csv", function(error, data) {
         .attr("x", width/2)
         .style("text-anchor", "middle")
         .attr("font-size", "12px")
-        .text("Population Density(Population per Sq. mile)");
+        .attr("font-weight", "bold")
+        .text("Population Density (Population Per Sq. Mile)");
 
     //Y-axis
     svg_a.append("g")
@@ -235,7 +236,8 @@ d3.csv("Data.csv", function(error, data) {
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .attr("font-size", "12px")
-        .text("O3 concentration(Parts per million)");
+        .attr("font-weight", "bold")
+        .text("O3 Concentration (Parts Per Million)");
     
     //http://d3-legend.susielu.com/#color-ordinal
     var legendOrdinal = d3.legendColor()
@@ -257,6 +259,7 @@ d3.csv("Data.csv", function(error, data) {
                 .attr("class", "caption")
                 .attr("x", 0)
                 .attr("y", -6)
+                .attr("font-weight", "bold")
                 .text("Population Density");
             
             var g = svg_a.append("g")
@@ -266,7 +269,8 @@ d3.csv("Data.csv", function(error, data) {
                 .attr("class", "caption")
                 .attr("x", 0)
                 .attr("y", -6)
-                .text("O3 concentration");
+                .attr("font-weight", "bold")
+                .text("O3 Concentration");
             var legend = d3.legendColor()
 //                .labels(function (d) { return labels[d.i]; })
             .cells(6)
