@@ -240,7 +240,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             .attr("clicked", 0)
                             .attr("stroke", "#222")
                             .attr("stroke-width", 0.05)
-                            .attr("clicked", 0)
+                            //.attr("clicked", 0)
                            //.attr("class", "mass")
                            .attr("class", function(d) {
                               //Get data value
@@ -252,7 +252,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                            })
 
                            .on("click", function(d){
-                                console.log(d);
+                                //console.log(d);
 
                                 if (!circleSelected()){
                                     d3.selectAll(".dot")
@@ -260,8 +260,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 }
                                 var dot_id = "d_" + d.properties.geoid;
                                 var dot_elt = document.getElementById(dot_id);
-                                console.log(dot_elt);
-                                d3.select(dot_elt).style("opacity", 1);
+                                //console.log(dot_elt);
+                                
                                 d.properties.selected = !d.properties.selected;
                            
                                 //help from https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
@@ -277,6 +277,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                     //console.log(this.id);
                                     
                                     d3.select(elt).style("fill", "yellow");
+                                    
+                                    d3.select(dot_elt).style("opacity", 0.7);
                                 } else{
                                     d3.select(this).style("fill", function(d){
                                         var value_1 = d.properties["Density " + year];
@@ -286,6 +288,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                         var value_2 = d.properties["Pollutant " + year];
                                         return color_2(value_2);
                                     });
+                                    
+                                    d3.select(dot_elt).style("opacity", 0.1);
                                 }
                                 
                                 
@@ -308,7 +312,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             .attr("clicked", 0)
                             .attr("stroke", "#222")
                             .attr("stroke-width", 0.05)
-                            .attr("clicked", 0)
+                            //.attr("clicked", 0)
                            //.attr("class", "mass")
                            .attr("class", function(d) {
                               //Get data value
@@ -319,7 +323,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                               return color_2(value_2);
                            })
                            .on("click", function(d){
-                                console.log(d);
+                                //console.log(d);
 
                                 if (!circleSelected()){
                                     d3.selectAll(".dot")
@@ -327,8 +331,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 }
                                 var dot_id = "d_" + d.properties.geoid;
                                 var dot_elt = document.getElementById(dot_id);
-                                console.log(dot_elt);
-                                d3.select(dot_elt).style("opacity", 1);
+                                //console.log(dot_elt);
+                                
                                 d.properties.selected = !d.properties.selected;
                            
                                 //console.log(this.id);
@@ -343,6 +347,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 if(d.properties.selected){
                                     d3.select(this).style("fill", "yellow");
                                     d3.select(elt).style("fill", "yellow");
+                                    d3.select(dot_elt).style("opacity", 0.7);
                                 } else{
                                     d3.select(this).style("fill", function(d){
                                         var value_2 = d.properties["Pollutant " + year];
@@ -352,6 +357,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                         var value_1 = d.properties["Density " + year];
                                         return color_1(value_1);
                                     });
+                                    d3.select(dot_elt).style("opacity", 0.1);
                                 }
                                 
                                 
