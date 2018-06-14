@@ -140,7 +140,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 var value_1 = d.properties["Density " + year];
                                 return color_1(value_1);
                             });
-                           d3.selectAll("msa2." + region_class).style("fill", function(d){
+                            var test_2 = ".msa2." + region_class;
+                           d3.selectAll(test_2).style("fill", function(d){
                                 console.log(d);
                                 var value_2 = d.properties["Pollutant " + year];
                                 return color_2(value_2);
@@ -222,7 +223,8 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 var value_1 = d.properties["Density " + year];
                                 return color_1(value_1);
                             });
-                           d3.selectAll("msa2." + region_class).style("fill", function(d){
+                            var test_2 = ".msa2." + region_class;
+                           d3.selectAll(test_2).style("fill", function(d){
                                 console.log(d);
                                 var value_2 = d.properties["Pollutant " + year];
                                 return color_2(value_2);
