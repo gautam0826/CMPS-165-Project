@@ -1,6 +1,6 @@
 //Define Margin
-var margin = {left: 80, right: 80, top: 50, bottom: 50 }, 
-    width = 960 - margin.left -margin.right,
+var margin = {left: 80, right: 380, top: 50, bottom: 50 }, 
+    width = 1260 - margin.left -margin.right,
     height = 500 - margin.top - margin.bottom;
 
 //Define Color
@@ -252,6 +252,37 @@ d3.csv("Data.csv", function(error, data) {
         .call(legendOrdinal);
         
 })
+
+
+            var g = svg_a.append("g")
+                .attr("class", "legendThreshold1")
+                .attr("transform", "translate(" + (width + margin.left+120) + "," + (margin.top - 20) + ")");
+                g.append("text")
+                .attr("class", "caption")
+                .attr("x", 0)
+                .attr("y", -6)
+                .text("Population Density");
+            
+            var g = svg_a.append("g")
+                .attr("class", "legendThreshold2")
+                .attr("transform", "translate(" + (width + margin.left+120) + "," + (margin.top + 220) + ")");
+                g.append("text")
+                .attr("class", "caption")
+                .attr("x", 0)
+                .attr("y", -6)
+                .text("O3 concentration");
+            var legend = d3.legendColor()
+//                .labels(function (d) { return labels[d.i]; })
+                .shapePadding(4)
+                .scale(color_1);
+                svg_a.select(".legendThreshold1")
+                .call(legend);
+            var legend_2 = d3.legendColor()
+//                .labels(function (d) { return labels[d.i]; })
+                .shapePadding(4)
+                .scale(color_2);
+                svg_a.select(".legendThreshold2")
+                .call(legend_2);
 
 //https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
 var slider2 = d3.sliderHorizontal()
