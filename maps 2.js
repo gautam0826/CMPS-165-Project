@@ -129,7 +129,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             if (!circleSelected2())
                             {
                                 d3.selectAll(".dot")
-                                    .style("opacity", 0.7);                                
+                                    .style("opacity", 0.7);
                             }
                             var region_class = this.id.substr(2,this.id.length);
                             //console.log(region_class);
@@ -306,7 +306,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                     
                                     d3.select(elt).style("fill", "yellow");
                                     
-                                    d3.select(dot_elt).style("opacity", 0.7);
+                                    d3.select(dot_elt).style("opacity", 1);
                                 } else{
                                     d3.select(this).style("fill", function(d){
                                         var value_1 = d.properties["Density " + year];
@@ -380,7 +380,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 if(d.properties.selected){
                                     d3.select(this).style("fill", "yellow");
                                     d3.select(elt).style("fill", "yellow");
-                                    d3.select(dot_elt).style("opacity", 0.7);
+                                    d3.select(dot_elt).style("opacity", 1);
                                 } else{
                                     d3.select(this).style("fill", function(d){
                                         var value_2 = d.properties["Pollutant " + year];
