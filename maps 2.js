@@ -135,7 +135,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                             var region_class = this.id.substr(2,this.id.length);
                             //console.log(region_class);
                             var test_1 = ".msa1." + region_class;
-                            console.log(test_1);
+                            //console.log(test_1);
                            d3.selectAll(test_1).style("fill", function(d){
                                 console.log(d);
                                 var value_1 = d.properties["Density " + year];
@@ -214,12 +214,17 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                     .style("opacity", 0.1);
                             }
                             
-                            d3.selectAll(".msa1").filter("." + d.properties.region).style("fill", function(d){
+                            var region_class = this.id.substr(2,this.id.length);
+                            //console.log(region_class);
+                            var test_1 = ".msa1." + region_class;
+                            //console.log(test_1);
+                           d3.selectAll(test_1).style("fill", function(d){
+                                console.log(d);
                                 var value_1 = d.properties["Density " + year];
                                 return color_1(value_1);
                             });
-                            
-                            d3.selectAll(".msa2").filter("." + d.properties.region).style("fill", function(d){
+                           d3.selectAll("msa2." + region_class).style("fill", function(d){
+                                console.log(d);
                                 var value_2 = d.properties["Pollutant " + year];
                                 return color_2(value_2);
                             });
