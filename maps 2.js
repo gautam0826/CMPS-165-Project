@@ -115,7 +115,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     })                           
                     .on("click", function(d){
                         //var circleSelected = ;
-                        console.log(circleSelected())
+                        //console.log(circleSelected())
                         var id = "2" + this.id.substr(1, this.id.length);
                         var elt = document.getElementById(id);
                         clicked = (d3.select(this).attr("clicked") == 0) && (d3.select(elt).attr("clicked") == 0);
@@ -132,6 +132,20 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 d3.selectAll(".dot")
                                     .style("opacity", 0.7);                                
                             }
+                            var region_class = this.id.substr(2,this.id.length);
+                            //console.log(region_class);
+                            var test_1 = ".msa1." + region_class;
+                            console.log(test_1);
+                           d3.selectAll(test_1).style("fill", function(d){
+                                console.log(d);
+                                var value_1 = d.properties["Density " + year];
+                                return color_1(value_1);
+                            });
+                           d3.selectAll("msa2." + region_class).style("fill", function(d){
+                                console.log(d);
+                                var value_2 = d.properties["Pollutant " + year];
+                                return color_2(value_2);
+                            });
                             return;
                         }
                         d3.select(this).style("fill", "rgb(211,211,211)");
@@ -199,6 +213,16 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                 d3.selectAll(".dot[region='" + this.id.substr(2, this.id.length) + "']")
                                     .style("opacity", 0.1);
                             }
+                            
+                            d3.selectAll(".msa1").filter("." + d.properties.region).style("fill", function(d){
+                                var value_1 = d.properties["Density " + year];
+                                return color_1(value_1);
+                            });
+                            
+                            d3.selectAll(".msa2").filter("." + d.properties.region).style("fill", function(d){
+                                var value_2 = d.properties["Pollutant " + year];
+                                return color_2(value_2);
+                            });
                             return;
                         }
                         d3.select(this).style("fill", "rgb(211,211,211)");
