@@ -20,10 +20,21 @@ body {
     float: left;
 }
 
+.legendThreshold2{
+/*    padding-right: 30px;*/
+    margin-right: 100px;
+}
 #maps {
     width: 20px;
     float: right;
 }
+
+.maps{
+/*    width: auto;*/
+/*    float: right;*/
+/*    height: auto;*/
+}
+
 
 .map1 {
     float: right;
