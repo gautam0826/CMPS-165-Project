@@ -349,6 +349,11 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                     
                                     d3.select(dot_elt).style("opacity", 0.1);
                                 }
+                           
+                                if (!circleSelected2()){
+                                d3.selectAll(".dot")
+                                    .style("opacity", 0.7);              
+                                }
                                 
                                 
                             })
@@ -418,7 +423,10 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                                     d3.select(dot_elt).style("opacity", 0.1);
                                 }
                                 
-                                
+                                if (!circleSelected2()){
+                                d3.selectAll(".dot")
+                                    .style("opacity", 0.7);              
+                                }
                             })
                             .append("title")
                             .text(function(d) {
