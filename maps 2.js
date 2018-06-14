@@ -17,11 +17,11 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 							 
 			//Define quantize scale to sort data values into buckets of color
 			var color_1 = d3.scaleSqrt()
-                                .domain([0,3200])
-                                .range(d3.schemeOrRd[3]);
+                                .domain([0,30,750, 1500, 3000])
+                                .range(d3.schemeOrRd[6]);
             var color_2 = d3.scaleLinear()
-                                .domain([.04, 0.16])
-                                .range(d3.schemeBlues[3]);
+                                .domain([.04, .08, .12, .16])
+                                .range(d3.schemeBlues[5]);
 								
 
             //var div = d3.select("body").append("div").attr("align", "right");
