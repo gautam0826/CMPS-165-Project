@@ -96,10 +96,23 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                         return "1_" + d.properties.region; 
                     })
                     .attr("stroke", "#222")
+//                    .attr("id", "temp")
                     .attr("stroke-width", 0.04)
                     .attr("class", "mass mapregion")
 					.style("fill", "rgb(237,237,237)")
                     .attr("clicked", 0)
+                    .on("mouseover", function(d){
+                        var dot_id = "1" + this.id.substr(1, this.id.length);
+                        var dot_elt = document.getElementById(dot_id);                
+                        d3.select(dot_elt)
+                            .style("opacity", .6);                            
+                    })   
+                    .on("mouseout", function(d){                        
+                        var dot_id = "1" + this.id.substr(1, this.id.length);                        
+                        var dot_elt = document.getElementById(dot_id);                                                
+                        d3.select(dot_elt)
+                            .style("opacity", 1)                                                      
+                    })                           
                     .on("click", function(d){
                         //var circleSelected = ;
                         console.log(circleSelected())
@@ -151,6 +164,18 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                     .attr("stroke", "#222")
                     .attr("stroke-width", 0.04)
                     .attr("class", "mass mapregion")
+                    .on("mouseover", function(d){                        
+                        var dot_id = "2" + this.id.substr(1, this.id.length);
+                        var dot_elt = document.getElementById(dot_id);                        
+                        d3.select(dot_elt)
+                            .style("opacity", .6);                            
+                            })   
+                     .on("mouseout", function(d){
+                        var dot_id = "2" + this.id.substr(1, this.id.length);
+                        var dot_elt = document.getElementById(dot_id);
+                        d3.select(dot_elt)
+                            .style("opacity", 1)                                                      
+                            })   
 					.style("fill", "rgb(237,237,237)")
                     .attr("clicked", 0)
                     .on("click", function(d){
@@ -225,6 +250,7 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
 					   		  var value_1 = d.properties["Density " + year];
                               return color_1(value_1);
                            })
+
                            .on("click", function(d){
                                 console.log(d);
 
