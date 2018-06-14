@@ -251,7 +251,7 @@ d3.csv("Data.csv", function(error, data) {
 
             var g = svg_a.append("g")
                 .attr("class", "legendThreshold1")
-                .attr("transform", "translate(" + (width + margin.left+100) + "," + (margin.top - 20) + ")");
+                .attr("transform", "translate(" + (width + margin.left+60) + "," + (margin.top - 20) + ")");
                 g.append("text")
                 .attr("class", "caption")
                 .attr("x", 0)
@@ -261,7 +261,7 @@ d3.csv("Data.csv", function(error, data) {
             
             var g = svg_a.append("g")
                 .attr("class", "legendThreshold2")
-                .attr("transform", "translate(" + (width + margin.left+100) + "," + (margin.top + 220) + ")");
+                .attr("transform", "translate(" + (width + margin.left+60) + "," + (margin.top + 220) + ")");
                 g.append("text")
                 .attr("class", "caption")
                 .attr("x", 0)
