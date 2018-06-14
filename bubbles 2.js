@@ -1,5 +1,5 @@
 //Define Margin
-var margin = {left: 80, right: 380, top: 50, bottom: 50 }, 
+var margin = {left: 80, right: 440, top: 50, bottom: 50 }, 
     width = 1260 - margin.left -margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -252,7 +252,7 @@ d3.csv("Data.csv", function(error, data) {
 
             var g = svg_a.append("g")
                 .attr("class", "legendThreshold1")
-                .attr("transform", "translate(" + (width + margin.left) + "," + (margin.top - 20) + ")");
+                .attr("transform", "translate(" + (width + margin.left + 75) + "," + (margin.top - 20) + ")");
                 g.append("text")
                 .attr("class", "caption")
                 .attr("x", 0)
@@ -261,7 +261,7 @@ d3.csv("Data.csv", function(error, data) {
             
             var g = svg_a.append("g")
                 .attr("class", "legendThreshold2")
-                .attr("transform", "translate(" + (width + margin.left) + "," + (margin.top + 220) + ")");
+                .attr("transform", "translate(" + (width + margin.left + 75) + "," + (margin.top + 220) + ")");
                 g.append("text")
                 .attr("class", "caption")
                 .attr("x", 0)
