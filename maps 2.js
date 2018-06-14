@@ -40,36 +40,6 @@ var margin = {left: 40, right: 40, top: 10, bottom: 30 },
                           .attr("width", w)
                           .attr("height", h);
 
-            var g = svg.append("g")
-                .attr("class", "legendThreshold")
-                .attr("transform", "translate(-10,90)");
-                g.append("text")
-                .attr("class", "caption")
-                .attr("x", 0)
-                .attr("y", -6)
-                .text("Population");
-            
-            var g = svg_2.append("g")
-                .attr("class", "legendThreshold")
-                .attr("transform", "translate(-10,90)");
-                g.append("text")
-                .attr("class", "caption")
-                .attr("x", 0)
-                .attr("y", -6)
-                .text("Pollution");
-            var legend = d3.legendColor()
-//                .labels(function (d) { return labels[d.i]; })
-                .shapePadding(4)
-                .scale(color_1);
-                svg.select(".legendThreshold")
-                .call(legend);
-            var legend_2 = d3.legendColor()
-//                .labels(function (d) { return labels[d.i]; })
-                .shapePadding(4)
-                .scale(color_2);
-                svg_2.select(".legendThreshold")
-                .call(legend_2);
-
             //Load in GeoJSON data
 			d3.json("us-regions.json", function(json) {
                 var numRegionsSelected = 0;
